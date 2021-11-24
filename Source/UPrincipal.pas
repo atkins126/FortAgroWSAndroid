@@ -35,6 +35,7 @@ uses UDmDb;
 
 procedure TfrmPrincipal.FormShow(Sender: TObject);
 begin
+  dmDB.ConectaPG_Local;
   THorse.Use(Jhonson);
   THorse.Use(HandleException);
   THorse.Get('/ping',
@@ -328,6 +329,19 @@ begin
      mLog.Lines.Add(FormatDateTime('dd-mm-yyyy-hh:mm:ss',now)+' : GetAuxTipoAplicacaoSolido');
      try
       Res.Send<TJSONObject>(dmDB.GetAuxTipoAplicacaoSolido);
+     except on ex:exception do
+      begin
+       mLog.Lines.Add(FormatDateTime('dd-mm-yyyy-hh:mm:ss',now)+' : Error '+ex.Message);
+       Res.Send(tjsonobject.Create.AddPair('Erro',ex.Message)).Status(201);
+      end;
+     end;
+  end);
+  THorse.Get('/GetTipoDB',
+  procedure(Req: THorseRequest; Res: THorseResponse; Next: TProc)
+  begin
+     mLog.Lines.Add(FormatDateTime('dd-mm-yyyy-hh:mm:ss',now)+' : Get Tipo DB');
+     try
+      Res.Send<TJSONObject>(dmDB.GetTipoDB);
      except on ex:exception do
       begin
        mLog.Lines.Add(FormatDateTime('dd-mm-yyyy-hh:mm:ss',now)+' : Error '+ex.Message);
@@ -828,10 +842,82 @@ begin
        end;
     end);
 
+    THorse.Post('/AuxItemRevisao',
+    procedure(Req: THorseRequest; Res: THorseResponse; Next: TProc)
+    var
+      LBody,LBodyRed: TJSONObject;
+    begin
+      mLog.Lines.Add(FormatDateTime('dd-mm-yyyy-hh:mm:ss',now)+' Enviando Aux Revisao Itens');
+      LBody := Req.Body<TJSONObject>;
+      try
+       LBodyRed:=dmDb.AcceptAuxRevisaoItens(LBody);
+       Res.Send(LBodyRed).Status(200)
+       except on ex:exception do
+       begin
+         mLog.Lines.Add(FormatDateTime('dd-mm-yyyy-hh:mm:ss',now)+' Erro :'+ex.Message);
+         Res.Send(tjsonobject.Create.AddPair('Mensagem', ex.Message)).Status(500);
+       end;
+      end;
+    end);
+
+    THorse.Post('/Revisao',
+    procedure(Req: THorseRequest; Res: THorseResponse; Next: TProc)
+    var
+      LBody,LBodyRed: TJSONObject;
+    begin
+      mLog.Lines.Add(FormatDateTime('dd-mm-yyyy-hh:mm:ss',now)+' Enviando Revisao');
+      LBody := Req.Body<TJSONObject>;
+      try
+       LBodyRed:=dmDb.AcceptRevisao(LBody);
+       Res.Send(LBodyRed).Status(200)
+       except on ex:exception do
+       begin
+         mLog.Lines.Add(FormatDateTime('dd-mm-yyyy-hh:mm:ss',now)+' Erro :'+ex.Message);
+         Res.Send(tjsonobject.Create.AddPair('Mensagem', ex.Message)).Status(500);
+       end;
+      end;
+    end);
+
+    THorse.Post('/RevisaoItens',
+    procedure(Req: THorseRequest; Res: THorseResponse; Next: TProc)
+    var
+      LBody,LBodyRed: TJSONObject;
+    begin
+      mLog.Lines.Add(FormatDateTime('dd-mm-yyyy-hh:mm:ss',now)+' Enviando Revisao Itens');
+      LBody := Req.Body<TJSONObject>;
+      try
+       LBodyRed:=dmDb.AcceptRevisaoItens(LBody);
+       Res.Send(LBodyRed).Status(200)
+       except on ex:exception do
+       begin
+         mLog.Lines.Add(FormatDateTime('dd-mm-yyyy-hh:mm:ss',now)+' Erro :'+ex.Message);
+         Res.Send(tjsonobject.Create.AddPair('Mensagem', ex.Message)).Status(500);
+       end;
+      end;
+    end);
+
+    THorse.Post('/RevisaoServicos',
+    procedure(Req: THorseRequest; Res: THorseResponse; Next: TProc)
+    var
+      LBody,LBodyRed: TJSONObject;
+    begin
+      mLog.Lines.Add(FormatDateTime('dd-mm-yyyy-hh:mm:ss',now)+' Enviando Revisao Servicos');
+      LBody := Req.Body<TJSONObject>;
+      try
+       LBodyRed:=dmDb.AcceptRevisaoServico(LBody);
+       Res.Send(LBodyRed).Status(200)
+       except on ex:exception do
+       begin
+         mLog.Lines.Add(FormatDateTime('dd-mm-yyyy-hh:mm:ss',now)+' Erro :'+ex.Message);
+         Res.Send(tjsonobject.Create.AddPair('Mensagem', ex.Message)).Status(500);
+       end;
+      end;
+    end);
+
 
     THorse.Listen(8099, procedure(Horse: THorse)
     begin
-      log.Caption := ('Servidor Fort Agro Rodando na porta: ' + Horse.Port.ToString+' v2021-02-02');
+      log.Caption := ('Servidor Fort Agro Rodando na porta: ' + Horse.Port.ToString+' v2021-11-02');
       Application.ProcessMessages;
     end);
 end;

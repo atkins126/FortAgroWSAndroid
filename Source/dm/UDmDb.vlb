@@ -118,17 +118,11 @@ Coordinates=1571,111,252,36
 [TDetReceituarioid]
 Coordinates=1237,1959,118,36
 
-[TPluviometroTalhoesdataalteracao]
-Coordinates=1218,1997,214,36
-
 [TSyncDetReceituariosyncaws]
 Coordinates=1237,2052,185,36
 
 [TStandPlantas]
 Coordinates=1498,782,99,322
-
-[TPluviometroTalhoessyncaws]
-Coordinates=1237,2107,185,36
 
 [TMaquinasprefixo]
 Coordinates=1237,2162,117,36
@@ -310,14 +304,8 @@ Coordinates=1571,1486,148,36
 [TMovLocalEstoquestatus]
 Coordinates=1571,1541,159,36
 
-[TAuxRevisaoItemgrupo]
-Coordinates=1571,1596,149,36
-
 [Embarqueavar]
 Coordinates=1571,1651,99,36
-
-[TManutencaoid]
-Coordinates=1571,1706,103,36
 
 [TUsuariosuperviso]
 Coordinates=1571,1761,122,36
@@ -382,9 +370,6 @@ Coordinates=1571,2641,90,36
 [TVazaoOperacaostatus]
 Coordinates=1571,2696,149,36
 
-[TAuxRevisaoItemsyncaws]
-Coordinates=1571,2751,165,36
-
 [TSyncReceituariodataalteracao]
 Coordinates=1571,2806,194,36
 
@@ -411,9 +396,6 @@ Coordinates=1283,3105,139,36
 
 [TDetReceituarioTalhaoidreceiturario]
 Coordinates=1922,221,222,36
-
-[TPluviometroTalhoesstatus]
-Coordinates=1104,3105,171,36
 
 [TAreasid]
 Coordinates=899,2473,66,36
@@ -490,14 +472,8 @@ Coordinates=1922,936,182,36
 [TProdutodefensivos]
 Coordinates=1922,991,129,36
 
-[TManutencaodatafim]
-Coordinates=1922,1046,135,36
-
 [vQRY]
 Coordinates=1052,1490,48,58
-
-[TPluviometroTalhoesidusuario]
-Coordinates=1922,1101,189,36
 
 [TMonitoramentoPragaidtalhao]
 Coordinates=1922,1156,188,36
@@ -585,9 +561,6 @@ Coordinates=1922,2476,142,36
 
 [SyncDetReceituarioTalhaoidreceiturario]
 Coordinates=2305,56,243,36
-
-[TPluviometroTalhoesdatareg]
-Coordinates=1922,2531,180,36
 
 [TOperadorMaquinaid]
 Coordinates=1922,2586,136,36
@@ -709,9 +682,6 @@ Coordinates=2305,661,152,36
 [TPlanoRevisaoMaquinasidrevisao]
 Coordinates=2305,716,209,36
 
-[TPluviometroTalhoessyncfaz]
-Coordinates=2305,771,180,36
-
 [Toperacaosafratalhaoarearealizada]
 Coordinates=2305,826,218,36
 
@@ -756,9 +726,6 @@ Coordinates=2305,1431,148,36
 
 [TDetReceituarioTalhaostatus]
 Coordinates=2305,1486,181,36
-
-[TAuxRevisaoItemsyncfaz]
-Coordinates=2305,1541,159,36
 
 [TLocalEstoquenome]
 Coordinates=2305,1596,132,36
@@ -819,9 +786,6 @@ Coordinates=2305,2641,222,36
 
 [TAuxCoberturaidusuario]
 Coordinates=2305,2696,154,36
-
-[TAuxRevisaoItemid]
-Coordinates=2305,2751,126,36
 
 [TMaquinasdataalteracao]
 Coordinates=2305,2806,156,36
@@ -889,9 +853,6 @@ Coordinates=2598,111,252,36
 [TTalhoesdataalteracao]
 Coordinates=1511,3253,146,36
 
-[TAuxRevisaoItemidusuarioalteracao]
-Coordinates=2598,166,221,36
-
 [TPluviometriasyncfaz]
 Coordinates=1372,3253,137,36
 
@@ -933,9 +894,6 @@ Coordinates=409,3253,89,36
 
 [Contratosidusuarioalteracao]
 Coordinates=2598,386,176,36
-
-[TPluviometroTalhoesidpluviometro]
-Coordinates=2598,441,213,36
 
 [Contratostotalcompravolume]
 Coordinates=2598,496,179,36
@@ -1114,9 +1072,6 @@ Coordinates=2598,2971,99,36
 [TOperadorMaquina]
 Coordinates=1000,782,126,322
 
-[TPluviometroTalhoesid]
-Coordinates=2598,3026,146,36
-
 [Tauxatividadeabastecimentodatareg]
 Coordinates=2598,3081,222,36
 
@@ -1125,9 +1080,6 @@ Coordinates=2598,3136,144,36
 
 [TSetorlongitude]
 Coordinates=2598,3191,106,36
-
-[TAuxRevisaoItemdatareg]
-Coordinates=2598,3246,159,36
 
 [TAbastecimentoobs]
 Coordinates=2598,3301,128,36
@@ -1146,9 +1098,6 @@ Coordinates=1992,3327,131,36
 
 [Tdetoperacaosafratalhaoprodutosidproduto]
 Coordinates=2976,221,262,36
-
-[TManutencaoidplanorevisao]
-Coordinates=1813,3320,176,36
 
 [TCultivaresstatus]
 Coordinates=1694,3327,114,36
@@ -1221,9 +1170,6 @@ Coordinates=2976,551,88,36
 
 [TmonitoramentopragasPontosponto]
 Coordinates=2976,606,219,36
-
-[TAuxRevisaoItemstatus]
-Coordinates=2976,661,150,36
 
 [TSetorareahe]
 Coordinates=2976,716,93,36
@@ -1392,9 +1338,6 @@ Coordinates=2957,3401,153,36
 
 [TDetReceituarioidusuario]
 Coordinates=2788,3401,160,36
-
-[TPluviometroTalhoesidtalhao]
-Coordinates=2599,3401,182,36
 
 [TmonitoramentopragasPontosValorescontagem]
 Coordinates=3398,56,287,36
@@ -1654,9 +1597,6 @@ Coordinates=3398,3466,89,36
 [TPlanoRevisaoItenssyncaws]
 Coordinates=3209,3475,179,36
 
-[TAuxRevisaoItemnome]
-Coordinates=3060,3475,148,36
-
 [TPlanoRevisaoItensqtde]
 Coordinates=2901,3475,155,36
 
@@ -1668,9 +1608,6 @@ Coordinates=3768,111,327,36
 
 [TSafrastatus]
 Coordinates=2633,3475,88,36
-
-[TAuxRevisaoItemidusuario]
-Coordinates=2464,3475,168,36
 
 [TMaquinasimg]
 Coordinates=2355,3475,99,36
@@ -1711,9 +1648,6 @@ Coordinates=3768,331,225,36
 [TDetReceituarioTalhaoidusuario]
 Coordinates=3768,386,200,36
 
-[TManutencaoidmaquina]
-Coordinates=1222,3475,152,36
-
 [Embarquestatus]
 Coordinates=1113,3475,108,36
 
@@ -1752,9 +1686,6 @@ Coordinates=3768,606,166,36
 
 [TMonitoramentoPragadatareg]
 Coordinates=3768,661,186,36
-
-[TManutencaodatainicio]
-Coordinates=3768,716,148,36
 
 [TUsuariomonitoramentopragas]
 Coordinates=3768,771,192,36
@@ -1830,9 +1761,6 @@ Coordinates=3768,2036,202,36
 
 [SyncDetReceituarioTalhaoidusuario]
 Coordinates=3768,2091,220,36
-
-[TAuxRevisaoItemdataalteracao]
-Coordinates=3768,2146,194,36
 
 [TSyncUsuarioidsegmento]
 Coordinates=3768,2201,162,36
@@ -1988,9 +1916,6 @@ Coordinates=569,10,108,476
 [TPlanoRevisaoMaquinasidusuarioalteracao]
 Coordinates=4162,221,263,36
 
-[TManutencaohorimetro]
-Coordinates=1255,3549,147,36
-
 [Tdetoperacaosafratalhaomaquinasoperadoreshorainicio]
 Coordinates=4162,276,334,36
 
@@ -2003,17 +1928,11 @@ Coordinates=4162,331,218,36
 [TUsuariomanutencaomaquinas]
 Coordinates=4162,386,193,36
 
-[TPluviometroTalhoesidusuarioalteracao]
-Coordinates=4162,441,242,36
-
 [TUsuariotokenapp]
 Coordinates=1017,3549,120,36
 
 [TTipoOcorrenciadataalteracao]
 Coordinates=4162,496,189,36
-
-[TManutencaohorimetroproxima]
-Coordinates=4162,551,193,36
 
 [TMonitoramentoPragaidusuarioalteracao]
 Coordinates=4162,606,248,36
@@ -2034,7 +1953,7 @@ Coordinates=4162,661,211,36
 Coordinates=4162,716,322,36
 
 []
-Coordinates=2598,2586,158,36
+Coordinates=1571,1706,103,36
 
 [FDConPG]
 Coordinates=3398,1211,84,36

@@ -49,7 +49,6 @@ object frmPrincipal: TfrmPrincipal
     Font.Style = []
     ParentFont = False
     TabOrder = 0
-    ExplicitHeight = 285
   end
   object Panel1: TPanel
     Left = 0
@@ -58,7 +57,6 @@ object frmPrincipal: TfrmPrincipal
     Height = 35
     Align = alBottom
     TabOrder = 1
-    ExplicitTop = 304
     object chkLogJson: TCheckBox
       Left = 624
       Top = 1

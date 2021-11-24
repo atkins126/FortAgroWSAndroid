@@ -4,19 +4,18 @@ object dmDB: TdmDB
   Width = 813
   object FDConPG: TFDConnection
     Params.Strings = (
-      'Database=Aws03112021'
+      'Database=FortAgropec'
       'User_Name=postgres'
       'Password=Dev#110485'
       'Server=127.0.0.1'
       'DriverID=PG')
-    Connected = True
     LoginPrompt = False
     Left = 40
     Top = 8
   end
   object PgDriverLink: TFDPhysPgDriverLink
-    VendorLib = 'E:\Projetos2021\Fortaleza\Deploy\libpq.dll'
-    Left = 88
+    Left = 104
+    Top = 8
   end
   object ScriptSetSequnce: TFDScript
     SQLScripts = <
@@ -949,49 +948,21 @@ object dmDB: TdmDB
   object TPluviometroTalhoes: TFDQuery
     Connection = FDConPG
     SQL.Strings = (
-      'select * from PluviometroTalhoes ')
+      'select  '
+      
+        #39'INSERT INTO pluviometrotalhoes(idusuario,idpluviometro, idtalha' +
+        'o)VALUES('#39'||idusuario||'#39','#39'||'
+      'idpluviometro||'#39','#39'||idtalhao||'#39')'#39' as Insert'
+      'from pluviometrotalhoes p '
+      'where status =1')
     Left = 224
     Top = 408
-    object TPluviometroTalhoesid: TIntegerField
-      FieldName = 'id'
-      Origin = 'id'
-      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
-    end
-    object TPluviometroTalhoesstatus: TIntegerField
-      FieldName = 'status'
-      Origin = 'status'
-    end
-    object TPluviometroTalhoesdatareg: TSQLTimeStampField
-      FieldName = 'datareg'
-      Origin = 'datareg'
-    end
-    object TPluviometroTalhoesidusuario: TIntegerField
-      FieldName = 'idusuario'
-      Origin = 'idusuario'
-    end
-    object TPluviometroTalhoesdataalteracao: TSQLTimeStampField
-      FieldName = 'dataalteracao'
-      Origin = 'dataalteracao'
-    end
-    object TPluviometroTalhoesidusuarioalteracao: TIntegerField
-      FieldName = 'idusuarioalteracao'
-      Origin = 'idusuarioalteracao'
-    end
-    object TPluviometroTalhoesidpluviometro: TIntegerField
-      FieldName = 'idpluviometro'
-      Origin = 'idpluviometro'
-    end
-    object TPluviometroTalhoesidtalhao: TIntegerField
-      FieldName = 'idtalhao'
-      Origin = 'idtalhao'
-    end
-    object TPluviometroTalhoessyncaws: TIntegerField
-      FieldName = 'syncaws'
-      Origin = 'syncaws'
-    end
-    object TPluviometroTalhoessyncfaz: TIntegerField
-      FieldName = 'syncfaz'
-      Origin = 'syncfaz'
+    object TPluviometroTalhoesinsert: TWideMemoField
+      AutoGenerateValue = arDefault
+      FieldName = 'insert'
+      Origin = '"insert"'
+      ReadOnly = True
+      BlobType = ftWideMemo
     end
   end
   object TLocalEstoque: TFDQuery
@@ -1270,7 +1241,7 @@ object dmDB: TdmDB
     SQL.Strings = (
       'select r.*,u.nome responsavel from receiturario r'
       'join usuario u on r.idResponsavel=u.id '
-      'where r.status=1')
+      'where r.status=1 and liberado=1')
     Left = 386
     Top = 214
     object TReceituarioid: TIntegerField
@@ -1662,7 +1633,7 @@ object dmDB: TdmDB
       'select dr.*,p.nome Produto from detreceiturario dr '
       'join produtos p on dr.idproduto=p.id')
     Left = 268
-    Top = 78
+    Top = 62
     object TDetReceituarioid: TIntegerField
       FieldName = 'id'
       Origin = 'id'
@@ -1723,7 +1694,8 @@ object dmDB: TdmDB
     CachedUpdates = True
     Connection = FDConPG
     SQL.Strings = (
-      'select * from operacaosafratalhao')
+      'select * from operacaosafratalhao'
+      'where status=-1000')
     Left = 521
     Top = 84
     object Toperacaosafratalhaoid: TIntegerField
@@ -1837,8 +1809,8 @@ object dmDB: TdmDB
   end
   object vQRY: TFDQuery
     Connection = FDConPG
-    Left = 408
-    Top = 424
+    Left = 568
+    Top = 280
   end
   object Tdetoperacaosafratalhaomaquinasoperadores: TFDQuery
     CachedUpdates = True
@@ -2041,7 +2013,7 @@ object dmDB: TdmDB
       'where syncaws=0 '
       'order by id')
     Left = 265
-    Top = 115
+    Top = 107
     object TVazaoOperacaoid: TIntegerField
       FieldName = 'id'
       Origin = 'id'
@@ -2313,6 +2285,35 @@ object dmDB: TdmDB
       FieldName = 'obs'
       Origin = 'obs'
       Size = 100
+    end
+    object TAbastecimentoimg: TWideMemoField
+      FieldName = 'img'
+      Origin = 'img'
+      BlobType = ftWideMemo
+    end
+    object TAbastecimentoimg2: TWideMemoField
+      FieldName = 'img2'
+      Origin = 'img2'
+      BlobType = ftWideMemo
+    end
+    object TAbastecimentoimg3: TWideMemoField
+      FieldName = 'img3'
+      Origin = 'img3'
+      BlobType = ftWideMemo
+    end
+    object TAbastecimentoimg4: TWideMemoField
+      FieldName = 'img4'
+      Origin = 'img4'
+      BlobType = ftWideMemo
+    end
+    object TAbastecimentoimg5: TWideMemoField
+      FieldName = 'img5'
+      Origin = 'img5'
+      BlobType = ftWideMemo
+    end
+    object TAbastecimentoexterno: TIntegerField
+      FieldName = 'externo'
+      Origin = 'externo'
     end
   end
   object TAbastecimentoOutros: TFDQuery
@@ -2620,8 +2621,8 @@ object dmDB: TdmDB
     Connection = FDConPG
     SQL.Strings = (
       'SELECT * FROM auxatividadeabastecimento')
-    Left = 584
-    Top = 400
+    Left = 568
+    Top = 384
     object Tauxatividadeabastecimentoid: TIntegerField
       FieldName = 'id'
     end
@@ -2941,45 +2942,25 @@ object dmDB: TdmDB
     SQL.Strings = (
       'select '
       
-        ' id,idplanorevisao,idmaquina,datainicio,datafim,horimetro,horime' +
-        'troproxima'
+        #39'INSERT INTO revisaomaquinahist(id,idplanorevisao,idmaquina, obs' +
+        'ervacao, datainicio, datafim,horimetro,horimetroproxima)VALUES('#39 +
+        '||'
+      
+        'id||'#39','#39'||idplanorevisao||'#39','#39'||idmaquina||'#39','#39'||'#39#39#39#39'||coalesce(obs' +
+        'ervacao,'#39#39')||'#39#39#39#39'||'#39','#39'||'#39#39#39#39'||datainicio||'#39#39#39#39'||'#39','#39'||'#39#39#39#39'||dataf' +
+        'im||'#39#39#39#39'||'#39','#39'||'
+      'horimetro||'#39','#39'||horimetroproxima||'#39');'#39' as INSERT'
       'from revisaomaquina '
-      'where status=1'
-      #9)
+      'where status>-1 and idplanorevisao>0'
+      'order by datainicio,horimetro ')
     Left = 48
     Top = 208
-    object TManutencaoid: TIntegerField
-      FieldName = 'id'
-      Origin = 'id'
-      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
-    end
-    object TManutencaoidplanorevisao: TIntegerField
-      FieldName = 'idplanorevisao'
-      Origin = 'idplanorevisao'
-    end
-    object TManutencaoidmaquina: TIntegerField
-      FieldName = 'idmaquina'
-      Origin = 'idmaquina'
-    end
-    object TManutencaodatainicio: TDateField
-      FieldName = 'datainicio'
-      Origin = 'datainicio'
-    end
-    object TManutencaodatafim: TDateField
-      FieldName = 'datafim'
-      Origin = 'datafim'
-    end
-    object TManutencaohorimetro: TBCDField
-      FieldName = 'horimetro'
-      Origin = 'horimetro'
-      Precision = 15
-      Size = 2
-    end
-    object TManutencaohorimetroproxima: TBCDField
-      FieldName = 'horimetroproxima'
-      Origin = 'horimetroproxima'
-      Precision = 15
-      Size = 3
+    object TManutencaoinsert: TWideMemoField
+      AutoGenerateValue = arDefault
+      FieldName = 'insert'
+      Origin = '"insert"'
+      ReadOnly = True
+      BlobType = ftWideMemo
     end
   end
   object TPlanoManutencao: TFDQuery
@@ -3160,52 +3141,22 @@ object dmDB: TdmDB
   object TAuxRevisaoItem: TFDQuery
     Connection = FDConPG
     SQL.Strings = (
-      'select * from auxrevisaoitens '
-      'where status =1')
+      
+        'select '#39'INSERT INTO auxrevisaoitens(id,status,idusuario,nome, gr' +
+        'upo,syncfaz,syncaws) VALUES('#39'||id||'#39','#39'||'
+      
+        'status||'#39','#39'||idusuario||'#39','#39'||'#39#39#39#39'||nome||'#39#39#39#39'||'#39','#39'||'#39#39#39#39'||grupo|' +
+        '|'#39#39#39#39'||'#39',1,1'#39'||'#39');'#39' as insert'
+      'from auxrevisaoitens '
+      'where status=1')
     Left = 40
     Top = 416
-    object TAuxRevisaoItemid: TIntegerField
-      FieldName = 'id'
-      Origin = 'id'
-      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
-    end
-    object TAuxRevisaoItemstatus: TIntegerField
-      FieldName = 'status'
-      Origin = 'status'
-    end
-    object TAuxRevisaoItemdatareg: TSQLTimeStampField
-      FieldName = 'datareg'
-      Origin = 'datareg'
-    end
-    object TAuxRevisaoItemidusuario: TIntegerField
-      FieldName = 'idusuario'
-      Origin = 'idusuario'
-    end
-    object TAuxRevisaoItemdataalteracao: TSQLTimeStampField
-      FieldName = 'dataalteracao'
-      Origin = 'dataalteracao'
-    end
-    object TAuxRevisaoItemidusuarioalteracao: TIntegerField
-      FieldName = 'idusuarioalteracao'
-      Origin = 'idusuarioalteracao'
-    end
-    object TAuxRevisaoItemnome: TWideStringField
-      FieldName = 'nome'
-      Origin = 'nome'
-      Size = 100
-    end
-    object TAuxRevisaoItemgrupo: TWideStringField
-      FieldName = 'grupo'
-      Origin = 'grupo'
-      Size = 100
-    end
-    object TAuxRevisaoItemsyncaws: TIntegerField
-      FieldName = 'syncaws'
-      Origin = 'syncaws'
-    end
-    object TAuxRevisaoItemsyncfaz: TIntegerField
-      FieldName = 'syncfaz'
-      Origin = 'syncfaz'
+    object TAuxRevisaoIteminsert: TWideMemoField
+      AutoGenerateValue = arDefault
+      FieldName = 'insert'
+      Origin = '"insert"'
+      ReadOnly = True
+      BlobType = ftWideMemo
     end
   end
   object TProdutosInsert: TFDQuery
@@ -3270,6 +3221,282 @@ object dmDB: TdmDB
       Origin = '"insert"'
       ReadOnly = True
       BlobType = ftWideMemo
+    end
+  end
+  object TPostRevisaoServico: TFDQuery
+    CachedUpdates = True
+    Connection = FDConPG
+    SQL.Strings = (
+      'SELECT * FROM servicomanutencao')
+    Left = 672
+    Top = 447
+    object TPostRevisaoServicoid: TIntegerField
+      FieldName = 'id'
+      Origin = 'id'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+    end
+    object TPostRevisaoServicostatus: TIntegerField
+      FieldName = 'status'
+      Origin = 'status'
+    end
+    object TPostRevisaoServicodatareg: TSQLTimeStampField
+      FieldName = 'datareg'
+      Origin = 'datareg'
+    end
+    object TPostRevisaoServicoidusuario: TIntegerField
+      FieldName = 'idusuario'
+      Origin = 'idusuario'
+    end
+    object TPostRevisaoServicodataalteracao: TSQLTimeStampField
+      FieldName = 'dataalteracao'
+      Origin = 'dataalteracao'
+    end
+    object TPostRevisaoServicoidusuarioalteracao: TIntegerField
+      FieldName = 'idusuarioalteracao'
+      Origin = 'idusuarioalteracao'
+    end
+    object TPostRevisaoServicotiposervico: TIntegerField
+      FieldName = 'tiposervico'
+      Origin = 'tiposervico'
+    end
+    object TPostRevisaoServicoidrevisao: TIntegerField
+      FieldName = 'idrevisao'
+      Origin = 'idrevisao'
+    end
+    object TPostRevisaoServicodescricao: TWideStringField
+      FieldName = 'descricao'
+      Origin = 'descricao'
+      Size = 100
+    end
+    object TPostRevisaoServicoresponsavel: TWideStringField
+      FieldName = 'responsavel'
+      Origin = 'responsavel'
+      Size = 100
+    end
+    object TPostRevisaoServicovalortotal: TBCDField
+      FieldName = 'valortotal'
+      Origin = 'valortotal'
+      Precision = 15
+      Size = 3
+    end
+    object TPostRevisaoServicosyncaws: TIntegerField
+      FieldName = 'syncaws'
+      Origin = 'syncaws'
+    end
+    object TPostRevisaoServicosyncfaz: TIntegerField
+      FieldName = 'syncfaz'
+      Origin = 'syncfaz'
+    end
+    object TPostRevisaoServicodatarealizado: TDateField
+      FieldName = 'datarealizado'
+      Origin = 'datarealizado'
+    end
+  end
+  object TPostRevisaoItem: TFDQuery
+    CachedUpdates = True
+    Connection = FDConPG
+    SQL.Strings = (
+      'select * from revisaomaquinaitens ')
+    Left = 568
+    Top = 447
+    object TPostRevisaoItemid: TIntegerField
+      FieldName = 'id'
+      Origin = 'id'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+    end
+    object TPostRevisaoItemstatus: TIntegerField
+      FieldName = 'status'
+      Origin = 'status'
+    end
+    object TPostRevisaoItemdatareg: TSQLTimeStampField
+      FieldName = 'datareg'
+      Origin = 'datareg'
+    end
+    object TPostRevisaoItemidusuario: TIntegerField
+      FieldName = 'idusuario'
+      Origin = 'idusuario'
+    end
+    object TPostRevisaoItemdataalteracao: TSQLTimeStampField
+      FieldName = 'dataalteracao'
+      Origin = 'dataalteracao'
+    end
+    object TPostRevisaoItemidusuarioalteracao: TIntegerField
+      FieldName = 'idusuarioalteracao'
+      Origin = 'idusuarioalteracao'
+    end
+    object TPostRevisaoItemidrevisao: TIntegerField
+      FieldName = 'idrevisao'
+      Origin = 'idrevisao'
+    end
+    object TPostRevisaoItemsyncaws: TIntegerField
+      FieldName = 'syncaws'
+      Origin = 'syncaws'
+    end
+    object TPostRevisaoItemsyncfaz: TIntegerField
+      FieldName = 'syncfaz'
+      Origin = 'syncfaz'
+    end
+    object TPostRevisaoItemidproduto: TIntegerField
+      FieldName = 'idproduto'
+      Origin = 'idproduto'
+    end
+    object TPostRevisaoItemqtde: TBCDField
+      FieldName = 'qtde'
+      Origin = 'qtde'
+      Precision = 10
+      Size = 3
+    end
+    object TPostRevisaoItemitem: TWideStringField
+      FieldName = 'item'
+      Origin = 'item'
+      Size = 100
+    end
+    object TPostRevisaoItemtipo: TIntegerField
+      FieldName = 'tipo'
+      Origin = 'tipo'
+    end
+    object TPostRevisaoItemobservacao: TWideStringField
+      FieldName = 'observacao'
+      Origin = 'observacao'
+      Size = 100
+    end
+    object TPostRevisaoItemiditem: TIntegerField
+      FieldName = 'iditem'
+      Origin = 'iditem'
+    end
+  end
+  object TPostRevisao: TFDQuery
+    CachedUpdates = True
+    Connection = FDConPG
+    SQL.Strings = (
+      'select * from revisaomaquina r ')
+    Left = 488
+    Top = 447
+    object TPostRevisaoid: TIntegerField
+      FieldName = 'id'
+      Origin = 'id'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+    end
+    object TPostRevisaostatus: TIntegerField
+      FieldName = 'status'
+      Origin = 'status'
+    end
+    object TPostRevisaodatareg: TSQLTimeStampField
+      FieldName = 'datareg'
+      Origin = 'datareg'
+    end
+    object TPostRevisaoidusuario: TIntegerField
+      FieldName = 'idusuario'
+      Origin = 'idusuario'
+    end
+    object TPostRevisaodataalteracao: TSQLTimeStampField
+      FieldName = 'dataalteracao'
+      Origin = 'dataalteracao'
+    end
+    object TPostRevisaoidusuarioalteracao: TIntegerField
+      FieldName = 'idusuarioalteracao'
+      Origin = 'idusuarioalteracao'
+    end
+    object TPostRevisaoidplanorevisao: TIntegerField
+      FieldName = 'idplanorevisao'
+      Origin = 'idplanorevisao'
+    end
+    object TPostRevisaoidmaquina: TIntegerField
+      FieldName = 'idmaquina'
+      Origin = 'idmaquina'
+    end
+    object TPostRevisaoobservacao: TWideStringField
+      FieldName = 'observacao'
+      Origin = 'observacao'
+      Size = 100
+    end
+    object TPostRevisaodatainicio: TDateField
+      FieldName = 'datainicio'
+      Origin = 'datainicio'
+    end
+    object TPostRevisaodatafim: TDateField
+      FieldName = 'datafim'
+      Origin = 'datafim'
+    end
+    object TPostRevisaosyncaws: TIntegerField
+      FieldName = 'syncaws'
+      Origin = 'syncaws'
+    end
+    object TPostRevisaosyncfaz: TIntegerField
+      FieldName = 'syncfaz'
+      Origin = 'syncfaz'
+    end
+    object TPostRevisaoidresponsavel: TIntegerField
+      FieldName = 'idresponsavel'
+      Origin = 'idresponsavel'
+    end
+    object TPostRevisaohorimetro: TBCDField
+      FieldName = 'horimetro'
+      Origin = 'horimetro'
+      Precision = 15
+      Size = 2
+    end
+    object TPostRevisaotipo: TIntegerField
+      FieldName = 'tipo'
+      Origin = 'tipo'
+    end
+    object TPostRevisaohorimetroproxima: TBCDField
+      FieldName = 'horimetroproxima'
+      Origin = 'horimetroproxima'
+      Precision = 15
+      Size = 3
+    end
+  end
+  object TPostAuxItemRevisao: TFDQuery
+    CachedUpdates = True
+    OnReconcileError = TPostAuxItemRevisaoReconcileError
+    Connection = FDConPG
+    SQL.Strings = (
+      'select * from auxrevisaoitens')
+    Left = 392
+    Top = 447
+    object TPostAuxItemRevisaoid: TIntegerField
+      FieldName = 'id'
+      Origin = 'id'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+    end
+    object TPostAuxItemRevisaostatus: TIntegerField
+      FieldName = 'status'
+      Origin = 'status'
+    end
+    object TPostAuxItemRevisaodatareg: TSQLTimeStampField
+      FieldName = 'datareg'
+      Origin = 'datareg'
+    end
+    object TPostAuxItemRevisaoidusuario: TIntegerField
+      FieldName = 'idusuario'
+      Origin = 'idusuario'
+    end
+    object TPostAuxItemRevisaodataalteracao: TSQLTimeStampField
+      FieldName = 'dataalteracao'
+      Origin = 'dataalteracao'
+    end
+    object TPostAuxItemRevisaoidusuarioalteracao: TIntegerField
+      FieldName = 'idusuarioalteracao'
+      Origin = 'idusuarioalteracao'
+    end
+    object TPostAuxItemRevisaonome: TWideStringField
+      FieldName = 'nome'
+      Origin = 'nome'
+      Size = 100
+    end
+    object TPostAuxItemRevisaogrupo: TWideStringField
+      FieldName = 'grupo'
+      Origin = 'grupo'
+      Size = 100
+    end
+    object TPostAuxItemRevisaosyncaws: TIntegerField
+      FieldName = 'syncaws'
+      Origin = 'syncaws'
+    end
+    object TPostAuxItemRevisaosyncfaz: TIntegerField
+      FieldName = 'syncfaz'
+      Origin = 'syncfaz'
     end
   end
 end

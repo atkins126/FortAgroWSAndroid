@@ -164,16 +164,6 @@ type
     TPluviometrosyncaws: TIntegerField;
     TPluviometrosyncfaz: TIntegerField;
     TPluviometroTalhoes: TFDQuery;
-    TPluviometroTalhoesid: TIntegerField;
-    TPluviometroTalhoesstatus: TIntegerField;
-    TPluviometroTalhoesdatareg: TSQLTimeStampField;
-    TPluviometroTalhoesidusuario: TIntegerField;
-    TPluviometroTalhoesdataalteracao: TSQLTimeStampField;
-    TPluviometroTalhoesidusuarioalteracao: TIntegerField;
-    TPluviometroTalhoesidpluviometro: TIntegerField;
-    TPluviometroTalhoesidtalhao: TIntegerField;
-    TPluviometroTalhoessyncaws: TIntegerField;
-    TPluviometroTalhoessyncfaz: TIntegerField;
     TLocalEstoque: TFDQuery;
     TLocalEstoqueid: TIntegerField;
     TLocalEstoquestatus: TIntegerField;
@@ -634,13 +624,6 @@ type
     TMaquinasmarca: TWideStringField;
     TManutencao: TFDQuery;
     TPlanoManutencao: TFDQuery;
-    TManutencaoid: TIntegerField;
-    TManutencaoidplanorevisao: TIntegerField;
-    TManutencaoidmaquina: TIntegerField;
-    TManutencaodatainicio: TDateField;
-    TManutencaodatafim: TDateField;
-    TManutencaohorimetro: TBCDField;
-    TManutencaohorimetroproxima: TBCDField;
     TUsuariosyncfaz: TIntegerField;
     TUsuariotokenapp: TWideStringField;
     TUsuariotokenappcompras: TWideStringField;
@@ -691,16 +674,6 @@ type
     TPlanoRevisaoMaquinassyncaws: TIntegerField;
     TPlanoRevisaoMaquinassyncfaz: TIntegerField;
     TAuxRevisaoItem: TFDQuery;
-    TAuxRevisaoItemid: TIntegerField;
-    TAuxRevisaoItemstatus: TIntegerField;
-    TAuxRevisaoItemdatareg: TSQLTimeStampField;
-    TAuxRevisaoItemidusuario: TIntegerField;
-    TAuxRevisaoItemdataalteracao: TSQLTimeStampField;
-    TAuxRevisaoItemidusuarioalteracao: TIntegerField;
-    TAuxRevisaoItemnome: TWideStringField;
-    TAuxRevisaoItemgrupo: TWideStringField;
-    TAuxRevisaoItemsyncaws: TIntegerField;
-    TAuxRevisaoItemsyncfaz: TIntegerField;
     TProdutosInsert: TFDQuery;
     TSyncDetReceituarioqtdporhe: TBCDField;
     TDetReceituarioqtdporhe: TBCDField;
@@ -709,6 +682,78 @@ type
     TPlanoRevisaoItensInsertinsert: TWideMemoField;
     TPlanoRevisaoMaquinasInsert: TFDQuery;
     TPlanoRevisaoMaquinasInsertinsert: TWideMemoField;
+    TAuxRevisaoIteminsert: TWideMemoField;
+    TPluviometroTalhoesinsert: TWideMemoField;
+    TManutencaoinsert: TWideMemoField;
+    TPostRevisaoServico: TFDQuery;
+    TPostRevisaoItem: TFDQuery;
+    TPostRevisaoItemid: TIntegerField;
+    TPostRevisaoItemstatus: TIntegerField;
+    TPostRevisaoItemdatareg: TSQLTimeStampField;
+    TPostRevisaoItemidusuario: TIntegerField;
+    TPostRevisaoItemdataalteracao: TSQLTimeStampField;
+    TPostRevisaoItemidusuarioalteracao: TIntegerField;
+    TPostRevisaoItemidrevisao: TIntegerField;
+    TPostRevisaoItemsyncaws: TIntegerField;
+    TPostRevisaoItemsyncfaz: TIntegerField;
+    TPostRevisaoItemidproduto: TIntegerField;
+    TPostRevisaoItemqtde: TBCDField;
+    TPostRevisaoItemitem: TWideStringField;
+    TPostRevisaoItemtipo: TIntegerField;
+    TPostRevisaoItemobservacao: TWideStringField;
+    TPostRevisaoItemiditem: TIntegerField;
+    TPostRevisao: TFDQuery;
+    TPostAuxItemRevisao: TFDQuery;
+    TPostAuxItemRevisaoid: TIntegerField;
+    TPostAuxItemRevisaostatus: TIntegerField;
+    TPostAuxItemRevisaodatareg: TSQLTimeStampField;
+    TPostAuxItemRevisaoidusuario: TIntegerField;
+    TPostAuxItemRevisaodataalteracao: TSQLTimeStampField;
+    TPostAuxItemRevisaoidusuarioalteracao: TIntegerField;
+    TPostAuxItemRevisaonome: TWideStringField;
+    TPostAuxItemRevisaogrupo: TWideStringField;
+    TPostAuxItemRevisaosyncaws: TIntegerField;
+    TPostAuxItemRevisaosyncfaz: TIntegerField;
+    TPostRevisaoServicoid: TIntegerField;
+    TPostRevisaoServicostatus: TIntegerField;
+    TPostRevisaoServicodatareg: TSQLTimeStampField;
+    TPostRevisaoServicoidusuario: TIntegerField;
+    TPostRevisaoServicodataalteracao: TSQLTimeStampField;
+    TPostRevisaoServicoidusuarioalteracao: TIntegerField;
+    TPostRevisaoServicotiposervico: TIntegerField;
+    TPostRevisaoServicoidrevisao: TIntegerField;
+    TPostRevisaoServicodescricao: TWideStringField;
+    TPostRevisaoServicoresponsavel: TWideStringField;
+    TPostRevisaoServicovalortotal: TBCDField;
+    TPostRevisaoServicosyncaws: TIntegerField;
+    TPostRevisaoServicosyncfaz: TIntegerField;
+    TPostRevisaoServicodatarealizado: TDateField;
+    TPostRevisaoid: TIntegerField;
+    TPostRevisaostatus: TIntegerField;
+    TPostRevisaodatareg: TSQLTimeStampField;
+    TPostRevisaoidusuario: TIntegerField;
+    TPostRevisaodataalteracao: TSQLTimeStampField;
+    TPostRevisaoidusuarioalteracao: TIntegerField;
+    TPostRevisaoidplanorevisao: TIntegerField;
+    TPostRevisaoidmaquina: TIntegerField;
+    TPostRevisaoobservacao: TWideStringField;
+    TPostRevisaodatainicio: TDateField;
+    TPostRevisaodatafim: TDateField;
+    TPostRevisaosyncaws: TIntegerField;
+    TPostRevisaosyncfaz: TIntegerField;
+    TPostRevisaoidresponsavel: TIntegerField;
+    TPostRevisaohorimetro: TBCDField;
+    TPostRevisaotipo: TIntegerField;
+    TPostRevisaohorimetroproxima: TBCDField;
+    TAbastecimentoimg: TWideMemoField;
+    TAbastecimentoimg2: TWideMemoField;
+    TAbastecimentoimg3: TWideMemoField;
+    TAbastecimentoimg4: TWideMemoField;
+    TAbastecimentoimg5: TWideMemoField;
+    TAbastecimentoexterno: TIntegerField;
+    procedure TPostAuxItemRevisaoReconcileError(DataSet: TFDDataSet;
+      E: EFDException; UpdateKind: TFDDatSRowState;
+      var Action: TFDDAptReconcileAction);
   private
     function  LerIni(Diretorio,Chave1, Chave2, ValorPadrao: String): String;
     function  VerificaStatusReceituario(idReceituario: string): string;
@@ -721,7 +766,7 @@ type
     procedure AlteraStatusReceituario(vid: string);
     function  VerificaPliviometria(idTalhao,vData,vHora:string): Boolean;
     function  VerificaAbastecimentoOutro(idAbastecimento,vIdProduto: string):Boolean;
-    function  VerificaAbastecimento(idMaquia, vData, vLitros: string): Boolean;
+    function  VerificaAbastecimento(idMaquia, vData, vLitros,horimetro: string): Boolean;
     function  RetornaMaxIdGenerico(Atabela: string): string;
     function  RetornaIdUsuario(ANome: string): string;
     procedure InsereSaidaAbastecimento(dataSaida, idcentrocusto,
@@ -760,6 +805,7 @@ type
     function  GetPlanoRevisaoMaquinas     : TJSONObject;
     function  GetAuxRevisaoItems          : TJSONObject;
     function  GetRevisao                  : TJSONObject;
+    function  GetTipoDB                   : TJSONObject;
 
     function  AcceptGetDetReceituario(obj: TJSONObject)             : TJSONObject;
     function  AcceptGetDetReceituarioTalhao(obj: TJSONObject)       : TJSONObject;
@@ -781,13 +827,17 @@ type
     function  AcceptPluviometria(obj: TJSONObject)                  : TJSONObject;
     function  AcceptAbastecimento(obj: TJSONObject)                 : TJSONObject;
     function  AcceptAbastecimentoOutros(obj: TJSONObject)           : TJSONObject;
-    function  AcceptMovLocalEstoque(obj: TJSONObject)          : TJSONObject;
+    function  AcceptMovLocalEstoque(obj: TJSONObject)               : TJSONObject;
 
     function  AcceptMonitoramento(obj: TJSONObject)                 : TJSONObject;
     function  AcceptMonitoramentoPontos(obj: TJSONObject)           : TJSONObject;
     function  AcceptMonitoramentoPontosValores(obj: TJSONObject)    : TJSONObject;
-
     function  AcceptEmbarques(obj: TJSONObject): TJSONObject;
+
+    function  AcceptAuxRevisaoItens(obj: TJSONObject): TJSONObject;
+    function  AcceptRevisao(obj: TJSONObject): TJSONObject;
+    function  AcceptRevisaoItens(obj: TJSONObject): TJSONObject;
+    function  AcceptRevisaoServico(obj: TJSONObject): TJSONObject;
 
     procedure AtualizaSaldoContrato(idContrato:string);
     procedure AtaulizaSaldoAtualCustoMedio(idProduto: string);
@@ -1040,8 +1090,6 @@ var
 begin
  if FDConPG.Connected=false then
   ConectaPG_Local;
- Toperacaosafratalhao.Close;
- Toperacaosafratalhao.Open;
  vJsonString := obj.ToString;
  vJoInsert := TJSONObject.ParseJSONValue(vJsonString) as TJSONObject;
  vJoItem := vJoInsert.GetValue('OperacaoSafra') as TJSONArray;
@@ -1058,18 +1106,19 @@ begin
      vIdOperacaoExiste := VerificaOperacaoReceituarioExiste(vJoItemO.GetValue('idTalhao').value,
       vJoItemO.GetValue('idreceituario').value);
     end;
-    if vIdOperacaoExiste.Length>0 then
-     Toperacaosafratalhao.Edit
-    else
-     Toperacaosafratalhao.Insert;
-
+    Toperacaosafratalhao.Close;
+    Toperacaosafratalhao.Open;
+    Toperacaosafratalhao.Insert;
     Toperacaosafratalhaoidusuario.AsString           := vJoItemO.GetValue('idUsuario').value;
     Toperacaosafratalhaoidsafra.AsString             := vJoItemO.GetValue('idSafra').value;
     Toperacaosafratalhaoidoperacao.AsString          := vJoItemO.GetValue('idOperacao').value;
     Toperacaosafratalhaodatainicio.AsString          := vJoItemO.GetValue('dataInicio').value;
     Toperacaosafratalhaodatafim.AsString             := vJoItemO.GetValue('dataFim').value;
     Toperacaosafratalhaoobservacao.AsString          := vJoItemO.GetValue('observacao').value;
-    Toperacaosafratalhaoidtalhao.AsString            := vJoItemO.GetValue('idTalhao').value;
+    if vJoItemO.GetValue('idTalhao').value='' then
+     Toperacaosafratalhaoidtalhao.AsString            :='90001'
+    else
+     Toperacaosafratalhaoidtalhao.AsString            := vJoItemO.GetValue('idTalhao').value;
     Toperacaosafratalhaoidresponsavel.AsString       := vJoItemO.GetValue('idUsuario').value;
     Toperacaosafratalhaoareaprevista.AsString        := vJoItemO.GetValue('areaPrev').value;
     Toperacaosafratalhaoarearealizada.AsString       := vJoItemO.GetValue('areaReal').value;
@@ -1625,6 +1674,193 @@ begin
   Result := TJsonObject.ParseJSONValue(TEncoding.UTF8.GetBytes(StrAux.ToString),0)as TJSONObject;
 end;
 
+function TdmDB.AcceptRevisao(obj: TJSONObject): TJSONObject;
+var
+  I,X: Integer;
+  JsonToSend :TStringStream;
+  vField,vFieldJS:string;
+  LJSon      : TJSONArray;
+  StrAux     : TStringWriter;
+  txtJson    : TJsonTextWriter;
+  vQry       : TFDQuery;
+  vIdResult  :string;
+begin
+  if FDConPG.Connected=false
+   then ConectaPG_Local;
+  vQry       := TFDQuery.Create(nil);
+  vQry.Connection := FDConPG;
+  TPostRevisao.Connection := FDConPG;
+  TPostRevisao.Open();
+  JsonToSend := TStringStream.Create(obj.ToJSON);
+  vQry.LoadFromStream(JsonToSend,sfJSON);
+  vIdResult:='';
+
+    TPostRevisao.Close;
+    TPostRevisao.Open;
+    TPostRevisao.Filtered := false;
+    TPostRevisao.Filter   := 'id='+vQry.FieldByName('id').AsString;
+    TPostRevisao.Filtered := true;
+    if TPostRevisao.IsEmpty then
+     TPostRevisao.Insert
+    else
+     TPostRevisao.edit;
+
+    for x := 0 to TPostRevisao.Fields.Count -1 do
+    begin
+     vField  := StringReplace(TPostRevisao.Fields[x].Name,
+      'TPostRevisao','',[rfReplaceAll]);
+     if (vField<>'datareg') and (vField<>'id') then
+      TPostRevisao.FieldByName(vField).AsString     := vQry.FieldByName(vField).AsString;
+    end;
+    try
+     TPostRevisao.ApplyUpdates(-1);
+     vIdResult:=RetornaMaxIdGenerico('revisaomaquina');
+    except
+      on E: Exception do
+      begin
+        StrAux  := TStringWriter.Create;
+        txtJson := TJsonTextWriter.Create(StrAux);
+        txtJson.Formatting := TJsonFormatting.Indented;
+        txtJson.WriteStartObject;
+        txtJson.WritePropertyName('Erro');
+        txtJson.WriteValue('Erro Ao Sincronizar Revisao:'+E.Message);
+        txtJson.WriteEndObject;
+        Result := TJsonObject.ParseJSONValue(TEncoding.UTF8.GetBytes(StrAux.ToString),0)as TJSONObject;
+      end;
+    end;
+   StrAux  := TStringWriter.Create;
+   txtJson := TJsonTextWriter.Create(StrAux);
+   txtJson.Formatting := TJsonFormatting.Indented;
+   txtJson.WriteStartObject;
+   txtJson.WritePropertyName('OK');
+   txtJson.WriteValue(vIdResult);
+   txtJson.WriteEndObject;
+   Result := TJsonObject.ParseJSONValue(TEncoding.UTF8.GetBytes(StrAux.ToString),0)as TJSONObject;
+end;
+
+function TdmDB.AcceptRevisaoItens(obj: TJSONObject): TJSONObject;
+var
+  I,X: Integer;
+  JsonToSend :TStringStream;
+  vField,vFieldJS:string;
+  LJSon      : TJSONArray;
+  StrAux     : TStringWriter;
+  txtJson    : TJsonTextWriter;
+  vQry       : TFDQuery;
+  vIdResult  :string;
+begin
+  if FDConPG.Connected=false
+   then ConectaPG_Local;
+  vQry       := TFDQuery.Create(nil);
+  vQry.Connection := FDConPG;
+  TPostRevisaoItem.Connection := FDConPG;
+  TPostRevisaoItem.Open();
+  JsonToSend := TStringStream.Create(obj.ToJSON);
+  vQry.LoadFromStream(JsonToSend,sfJSON);
+  vIdResult:='';
+  while not vQry.eof do
+  begin
+    TPostRevisaoItem.Close;
+    TPostRevisaoItem.Open;
+    TPostRevisaoItem.Insert;
+    for x := 0 to TPostRevisaoItem.Fields.Count -1 do
+    begin
+     vField  := StringReplace(TPostRevisaoItem.Fields[x].Name,
+      'TPostRevisaoItem','',[rfReplaceAll]);
+     if (vField<>'datareg') and (vField<>'id') then
+      TPostRevisaoItem.FieldByName(vField).AsString     := vQry.FieldByName(vField).AsString;
+    end;
+    try
+     TPostRevisaoItem.ApplyUpdates(-1);
+     if vIdResult.Length>0 then
+      vIdResult:=vIdResult+','+vQry.FieldByName('id').AsString
+     else
+      vIdResult:=vQry.FieldByName('id').AsString;
+     vQry.Next;
+    except
+      on E: Exception do
+      begin
+        StrAux  := TStringWriter.Create;
+        txtJson := TJsonTextWriter.Create(StrAux);
+        txtJson.Formatting := TJsonFormatting.Indented;
+        txtJson.WriteStartObject;
+        txtJson.WritePropertyName('Erro');
+        txtJson.WriteValue('Erro Ao Sincronizar Revisao Item:'+E.Message);
+        txtJson.WriteEndObject;
+        Result := TJsonObject.ParseJSONValue(TEncoding.UTF8.GetBytes(StrAux.ToString),0)as TJSONObject;
+      end;
+    end;
+  end;
+  StrAux  := TStringWriter.Create;
+  txtJson := TJsonTextWriter.Create(StrAux);
+  txtJson.Formatting := TJsonFormatting.Indented;
+  txtJson.WriteStartObject;
+  txtJson.WritePropertyName('OK');
+  txtJson.WriteValue(vIdResult);
+  txtJson.WriteEndObject;
+  Result := TJsonObject.ParseJSONValue(TEncoding.UTF8.GetBytes(StrAux.ToString),0)as TJSONObject;
+end;
+
+function TdmDB.AcceptRevisaoServico(obj: TJSONObject): TJSONObject;
+var
+  I,X: Integer;
+  JsonToSend :TStringStream;
+  vField,vFieldJS:string;
+  LJSon      : TJSONArray;
+  StrAux     : TStringWriter;
+  txtJson    : TJsonTextWriter;
+  vQry       : TFDQuery;
+  vIdResult  :string;
+begin
+  if FDConPG.Connected=false
+   then ConectaPG_Local;
+  vQry       := TFDQuery.Create(nil);
+  vQry.Connection := FDConPG;
+  TPostRevisaoServico.Connection := FDConPG;
+  TPostRevisaoServico.Open();
+  JsonToSend := TStringStream.Create(obj.ToJSON);
+  vQry.LoadFromStream(JsonToSend,sfJSON);
+  vIdResult:='';
+  TPostRevisaoServico.Close;
+  TPostRevisaoServico.Open;
+  TPostRevisaoServico.Insert;
+  for x := 0 to TPostRevisaoServico.Fields.Count -1 do
+  begin
+   vField  := StringReplace(TPostRevisaoServico.Fields[x].Name,
+    'TPostRevisaoServico','',[rfReplaceAll]);
+   if (vField<>'datareg') and (vField<>'id') then
+    TPostRevisaoServico.FieldByName(vField).AsString     := vQry.FieldByName(vField).AsString;
+  end;
+  try
+   TPostRevisaoServico.ApplyUpdates(-1);
+   if vIdResult.Length>0 then
+    vIdResult:=vIdResult+','+vQry.FieldByName('id').AsString
+   else
+    vIdResult:=vQry.FieldByName('id').AsString;
+   vQry.Next;
+  except
+    on E: Exception do
+    begin
+      StrAux  := TStringWriter.Create;
+      txtJson := TJsonTextWriter.Create(StrAux);
+      txtJson.Formatting := TJsonFormatting.Indented;
+      txtJson.WriteStartObject;
+      txtJson.WritePropertyName('Erro');
+      txtJson.WriteValue('Erro Ao Sincronizar Revisao Servico:'+E.Message);
+      txtJson.WriteEndObject;
+      Result := TJsonObject.ParseJSONValue(TEncoding.UTF8.GetBytes(StrAux.ToString),0)as TJSONObject;
+    end;
+  end;
+  StrAux  := TStringWriter.Create;
+  txtJson := TJsonTextWriter.Create(StrAux);
+  txtJson.Formatting := TJsonFormatting.Indented;
+  txtJson.WriteStartObject;
+  txtJson.WritePropertyName('OK');
+  txtJson.WriteValue(vIdResult);
+  txtJson.WriteEndObject;
+  Result := TJsonObject.ParseJSONValue(TEncoding.UTF8.GetBytes(StrAux.ToString),0)as TJSONObject;
+end;
+
 procedure TdmDB.AlteraStatusReceituario(vid: string);
 var
  qryAux : TFDQuery;
@@ -1655,6 +1891,13 @@ begin
    else
     Result := FieldByName('idMax').AsString;
  end;
+end;
+
+procedure TdmDB.TPostAuxItemRevisaoReconcileError(DataSet: TFDDataSet;
+  E: EFDException; UpdateKind: TFDDatSRowState;
+  var Action: TFDDAptReconcileAction);
+begin
+ ShowMessage(e.Message);
 end;
 
 function TdmDB.AcceptTonkenApp(T: TJSONObject): TJSONObject;
@@ -1860,6 +2103,39 @@ begin
 
 end;
 
+
+function TdmDB.GetTipoDB: TJSONObject;
+var
+ LJSon      : TJSONArray;
+ StrAux     : TStringWriter;
+ txtJson    : TJsonTextWriter;
+ vTipoDB : string;
+
+begin
+   with vQry,vQry.SQL do
+   begin
+     Clear;
+     Add('select * from systemconfig');
+     Open;
+     if FieldByName('agricultura').AsInteger=1 then
+       vTipoDB:='AGRICULTURA'
+     ELSE
+       vTipoDB:='PECUARIA'
+   end;
+   StrAux  := TStringWriter.Create;
+   txtJson := TJsonTextWriter.Create(StrAux);
+   txtJson.Formatting := TJsonFormatting.Indented;
+   TxtJSON.WriteStartObject;
+    TxtJSON.WritePropertyName('TipoDB');
+     TxtJSON.WriteStartArray;
+      txtJson.WriteStartObject;
+      txtJson.WritePropertyName('TIPO');
+      txtJson.WriteValue(vTipoDB);
+     txtJson.WriteEndObject;
+   TxtJSON.WriteEndArray;
+   TxtJSON.WriteEndObject;
+   Result := TJsonObject.ParseJSONValue(TEncoding.UTF8.GetBytes(StrAux.ToString),0)as TJSONObject;
+end;
 
 function TdmDB.GetTipoOcorrencia: TJSONObject;
 var
@@ -2125,7 +2401,7 @@ begin
 end;
 
 function TdmDB.VerificaAbastecimento(idMaquia, vData,
-  vLitros: string): Boolean;
+  vLitros,horimetro: string): Boolean;
 var
  vQry:TFDQuery;
 begin
@@ -2137,7 +2413,8 @@ begin
    Add('select * from abastecimento');
    Add('where idmaquina='+idMaquia);
    Add('and dataabastecimento='+vData);
-   Add('and volumelt='+vLitros);
+   Add('and volumelt='+StringReplace(vLitros,',','.',[rfReplaceAll]));
+   Add('and horimetro='+StringReplace(horimetro,',','.',[rfReplaceAll]));
    try
      Open;
      Result := vQry.IsEmpty;
@@ -2202,17 +2479,14 @@ begin
     frmPrincipal.mlog.Lines.Add('Verifica Abastecimento Existe Id Maquina:'+
     vQry.FieldByName('idMaquina').AsString);
     if VerificaAbastecimento(
-     vQry.FieldByName('idMaquina').AsString,
-      FormatDateTime('yyyy-mm-dd',vQry.FieldByName('dataabastecimento').AsDateTime).QuotedString,
-       vQry.FieldByName('volumelt').AsString.QuotedString) then
+      vQry.FieldByName('idMaquina').AsString,
+      FormatDateTime('yyyy-mm-dd',
+      vQry.FieldByName('dataabastecimento').AsDateTime).QuotedString,
+      vQry.FieldByName('volumelt').AsString.QuotedString,
+      vQry.FieldByName('horimetro').AsString.QuotedString) then
       TAbastecimento.Insert
      else
-     begin
-      TAbastecimento.Filtered := false;
-      TAbastecimento.Filter   := 'id='+vQry.FieldByName('id').AsString;
-      TAbastecimento.Filtered := True;
-      TAbastecimento.edit;
-     end;
+      vQry.Next;
      for x := 0 to TAbastecimento.Fields.Count -1 do
      begin
       vField  := StringReplace(TAbastecimento.Fields[x].Name,
@@ -2238,9 +2512,8 @@ begin
       FormatDateTime('yyyy-mm-dd',vQry.FieldByName('dataabastecimento').AsDateTime),'1',
        vQry.FieldByName('idlocalestoque').AsString,
        vQry.FieldByName('combustivel').AsString,
-       vQry.FieldByName('volumelt').AsString,'0');
-
-
+       StringReplace(vQry.FieldByName('volumelt').AsString,',','.',[rfReplaceAll]),
+       '0');
       if vIdResult.Length>0 then
        vIdResult:=vIdResult+','+vQry.FieldByName('id').AsString
       else
@@ -2255,8 +2528,10 @@ begin
          txtJson.WriteStartObject;
          txtJson.WritePropertyName('Erro');
          txtJson.WriteValue('Erro Ao Sincronizar Abastecimento:'+E.Message);
+         frmPrincipal.mlog.Lines.Add('Erro Ao Sincronizar Abastecimento:'+E.Message);
          txtJson.WriteEndObject;
          Result := TJsonObject.ParseJSONValue(TEncoding.UTF8.GetBytes(StrAux.ToString),0)as TJSONObject;
+         Break;
        end;
     end;
   end;
@@ -2498,6 +2773,66 @@ begin
          txtJson.WriteEndObject;
          Result := TJsonObject.ParseJSONValue(TEncoding.UTF8.GetBytes(StrAux.ToString),0)as TJSONObject;
        end;
+    end;
+  end;
+  StrAux  := TStringWriter.Create;
+  txtJson := TJsonTextWriter.Create(StrAux);
+  txtJson.Formatting := TJsonFormatting.Indented;
+  txtJson.WriteStartObject;
+  txtJson.WritePropertyName('OK');
+  txtJson.WriteValue(vIdResult);
+  txtJson.WriteEndObject;
+  Result := TJsonObject.ParseJSONValue(TEncoding.UTF8.GetBytes(StrAux.ToString),0)as TJSONObject;
+end;
+
+function TdmDB.AcceptAuxRevisaoItens(obj: TJSONObject): TJSONObject;
+var
+  I,X: Integer;
+  JsonToSend :TStringStream;
+  vField,vFieldJS:string;
+  LJSon      : TJSONArray;
+  StrAux     : TStringWriter;
+  txtJson    : TJsonTextWriter;
+  vQry       : TFDQuery;
+  vIdResult  :string;
+begin
+  if FDConPG.Connected=false
+   then ConectaPG_Local;
+  vQry       := TFDQuery.Create(nil);
+  vQry.Connection := FDConPG;
+  TPostAuxItemRevisao.Connection := FDConPG;
+  TPostAuxItemRevisao.Open();
+  JsonToSend := TStringStream.Create(obj.ToJSON);
+  vQry.LoadFromStream(JsonToSend,sfJSON);
+  vIdResult:='';
+  while not vQry.eof do
+  begin
+    TPostAuxItemRevisao.Close;
+    TPostAuxItemRevisao.Open;
+    TPostAuxItemRevisao.Insert;
+    for x := 0 to TPostAuxItemRevisao.Fields.Count -1 do
+    begin
+     vField  := StringReplace(TPostAuxItemRevisao.Fields[x].Name,
+      'TPostAuxItemRevisao','',[rfReplaceAll]);
+     if (vField<>'datareg') and (vField<>'id') then
+      TPostAuxItemRevisao.FieldByName(vField).AsString     := vQry.FieldByName(vField).AsString;
+    end;
+    try
+     TPostAuxItemRevisao.ApplyUpdates(-1);
+     vIdResult:=RetornaMaxIdGenerico('auxrevisaoitens');
+     vQry.Next;
+    except
+      on E: Exception do
+      begin
+        StrAux  := TStringWriter.Create;
+        txtJson := TJsonTextWriter.Create(StrAux);
+        txtJson.Formatting := TJsonFormatting.Indented;
+        txtJson.WriteStartObject;
+        txtJson.WritePropertyName('Erro');
+        txtJson.WriteValue('Erro Ao Sincronizar Aux Item Revisao:'+E.Message);
+        txtJson.WriteEndObject;
+        Result := TJsonObject.ParseJSONValue(TEncoding.UTF8.GetBytes(StrAux.ToString),0)as TJSONObject;
+      end;
     end;
   end;
   StrAux  := TStringWriter.Create;
@@ -3298,28 +3633,88 @@ end;
 
 function TdmDB.GetAuxRevisaoItems: TJSONObject;
 var
- URL,vReultHTTP:STRING;
- JsonToSend  : TStringStream;
- I:integer;
+ LJSon      : TJSONArray;
+ StrAux     : TStringWriter;
+ txtJson    : TJsonTextWriter;
+ InsertInto : string;
 begin
- if FDConPG.Connected=false then ConectaPG_Local;
- TAuxRevisaoItem.Connection := FDConPG;
- TAuxRevisaoItem.Close;
- TAuxRevisaoItem.Open;
- Result := GetDataSetAsJSON(TAuxRevisaoItem);
+   if FDConPG.Connected=false then ConectaPG_Local;
+   TAuxRevisaoItem.Close;
+   TAuxRevisaoItem.Open;
+   if not TAuxRevisaoItem.IsEmpty then
+   begin
+     StrAux  := TStringWriter.Create;
+     txtJson := TJsonTextWriter.Create(StrAux);
+     txtJson.Formatting := TJsonFormatting.Indented;
+     TxtJSON.WriteStartObject; //Objeto maior
+     TxtJSON.WritePropertyName('TAuxRevisaoItem');
+     TxtJSON.WriteStartArray; //Objeto pedido
+     while not TAuxRevisaoItem.Eof do
+     begin
+      txtJson.WriteStartObject;
+      txtJson.WritePropertyName('INSERT');
+      txtJson.WriteValue(TAuxRevisaoItem.FieldByName('INSERT').AsString);
+      txtJson.WriteEndObject;
+      TAuxRevisaoItem.Next;
+     end;
+     TxtJSON.WriteEndArray; //Fecha Array dos Itens
+     TxtJSON.WriteEndObject;  //Fecha Cabecalho do pedido
+     Result := TJsonObject.ParseJSONValue(TEncoding.UTF8.GetBytes(StrAux.ToString),0)as TJSONObject;
+   end
+   else
+   begin
+    StrAux  := TStringWriter.Create;
+    txtJson := TJsonTextWriter.Create(StrAux);
+    txtJson.Formatting := TJsonFormatting.Indented;
+    txtJson.WriteStartObject;
+     txtJson.WritePropertyName('Mensagem');
+     txtJson.WriteValue('Nenhum Aux Item Revisao encontrado!');
+    txtJson.WriteEndObject;
+    Result := TJsonObject.ParseJSONValue(TEncoding.UTF8.GetBytes(StrAux.ToString),0)as TJSONObject;
+   end;
 end;
 
 function TdmDB.GetRevisao: TJSONObject;
 var
- URL,vReultHTTP:STRING;
- JsonToSend  : TStringStream;
- I:integer;
+ LJSon      : TJSONArray;
+ StrAux     : TStringWriter;
+ txtJson    : TJsonTextWriter;
+ InsertInto : string;
 begin
- if FDConPG.Connected=false then ConectaPG_Local;
-  TManutencao.Connection := FDConPG;
- TManutencao.Close;
- TManutencao.Open;
- Result := GetDataSetAsJSON(TManutencao);
+   if FDConPG.Connected=false then ConectaPG_Local;
+   TManutencao.Close;
+   TManutencao.Open;
+   if not TManutencao.IsEmpty then
+   begin
+     StrAux  := TStringWriter.Create;
+     txtJson := TJsonTextWriter.Create(StrAux);
+     txtJson.Formatting := TJsonFormatting.Indented;
+     TxtJSON.WriteStartObject; //Objeto maior
+     TxtJSON.WritePropertyName('TAuxRevisaoHist');
+     TxtJSON.WriteStartArray; //Objeto pedido
+     while not TManutencao.Eof do
+     begin
+      txtJson.WriteStartObject;
+      txtJson.WritePropertyName('INSERT');
+      txtJson.WriteValue(TManutencao.FieldByName('INSERT').AsString);
+      txtJson.WriteEndObject;
+      TManutencao.Next;
+     end;
+     TxtJSON.WriteEndArray; //Fecha Array dos Itens
+     TxtJSON.WriteEndObject;  //Fecha Cabecalho do pedido
+     Result := TJsonObject.ParseJSONValue(TEncoding.UTF8.GetBytes(StrAux.ToString),0)as TJSONObject;
+   end
+   else
+   begin
+    StrAux  := TStringWriter.Create;
+    txtJson := TJsonTextWriter.Create(StrAux);
+    txtJson.Formatting := TJsonFormatting.Indented;
+    txtJson.WriteStartObject;
+     txtJson.WritePropertyName('Mensagem');
+     txtJson.WriteValue('Nenhum Revisao Historico encontrado!');
+    txtJson.WriteEndObject;
+    Result := TJsonObject.ParseJSONValue(TEncoding.UTF8.GetBytes(StrAux.ToString),0)as TJSONObject;
+   end;
 end;
 
 function TdmDB.GetPluviometro: TJSONObject;
@@ -3337,15 +3732,45 @@ end;
 
 function TdmDB.GetPluviometroTalhoes: TJSONObject;
 var
- URL,vReultHTTP:STRING;
- JsonToSend  : TStringStream;
- I:integer;
+ LJSon      : TJSONArray;
+ StrAux     : TStringWriter;
+ txtJson    : TJsonTextWriter;
+ InsertInto : string;
 begin
- if FDConPG.Connected=false then ConectaPG_Local;
- TPluviometroTalhoes.Connection := FDConPG;
- TPluviometroTalhoes.Close;
- TPluviometroTalhoes.Open;
- Result := GetDataSetAsJSON(TPluviometroTalhoes);
+   if FDConPG.Connected=false then ConectaPG_Local;
+   TPluviometroTalhoes.Close;
+   TPluviometroTalhoes.Open;
+   if not TPluviometroTalhoes.IsEmpty then
+   begin
+     StrAux  := TStringWriter.Create;
+     txtJson := TJsonTextWriter.Create(StrAux);
+     txtJson.Formatting := TJsonFormatting.Indented;
+     TxtJSON.WriteStartObject; //Objeto maior
+     TxtJSON.WritePropertyName('TPluviometroTalhoes');
+     TxtJSON.WriteStartArray; //Objeto pedido
+     while not TPluviometroTalhoes.Eof do
+     begin
+      txtJson.WriteStartObject;
+      txtJson.WritePropertyName('INSERT');
+      txtJson.WriteValue(TPluviometroTalhoes.FieldByName('INSERT').AsString);
+      txtJson.WriteEndObject;
+      TPluviometroTalhoes.Next;
+     end;
+     TxtJSON.WriteEndArray; //Fecha Array dos Itens
+     TxtJSON.WriteEndObject;  //Fecha Cabecalho do pedido
+     Result := TJsonObject.ParseJSONValue(TEncoding.UTF8.GetBytes(StrAux.ToString),0)as TJSONObject;
+   end
+   else
+   begin
+    StrAux  := TStringWriter.Create;
+    txtJson := TJsonTextWriter.Create(StrAux);
+    txtJson.Formatting := TJsonFormatting.Indented;
+    txtJson.WriteStartObject;
+     txtJson.WritePropertyName('Mensagem');
+     txtJson.WriteValue('Nenhum Pluviometro Talhoes encontrado!');
+    txtJson.WriteEndObject;
+    Result := TJsonObject.ParseJSONValue(TEncoding.UTF8.GetBytes(StrAux.ToString),0)as TJSONObject;
+   end;
 end;
 
 function TdmDB.GetLocalEstoque: TJSONObject;
