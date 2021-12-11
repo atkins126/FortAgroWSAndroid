@@ -4,7 +4,7 @@ object dmDB: TdmDB
   Width = 813
   object FDConPG: TFDConnection
     Params.Strings = (
-      'Database=FortAgropec'
+      'Database=FortAgro0612'
       'User_Name=postgres'
       'Password=Dev#110485'
       'Server=127.0.0.1'
@@ -3166,7 +3166,7 @@ object dmDB: TdmDB
       
         #39'insert into produtos(id,status,nome,tipo,unidademedida,defenciv' +
         'o,codigofabricante)values('#39'||'
-      'id||'#39','#39'||status||'#39','#39'||'#39#39#39#39'||nome||'#39#39#39#39'||'#39','#39'||'
+      'id||'#39','#39'||status||'#39','#39'||'#39#39#39#39'||replace(nome,'#39#39#39#39','#39' '#39')||'#39#39#39#39'||'#39','#39'||'
       'case'
       ' when defensivos=0 then 0'
       ' else'
@@ -3497,6 +3497,126 @@ object dmDB: TdmDB
     object TPostAuxItemRevisaosyncfaz: TIntegerField
       FieldName = 'syncfaz'
       Origin = 'syncfaz'
+    end
+  end
+  object Desembarques: TFDQuery
+    CachedUpdates = True
+    Connection = FDConPG
+    SQL.Strings = (
+      'select * from desembarque')
+    Left = 392
+    Top = 88
+    object Desembarquesid: TIntegerField
+      FieldName = 'id'
+      Origin = 'id'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+    end
+    object Desembarquesstatus: TIntegerField
+      FieldName = 'status'
+      Origin = 'status'
+    end
+    object Desembarquesdatareg: TSQLTimeStampField
+      FieldName = 'datareg'
+      Origin = 'datareg'
+    end
+    object Desembarquesidusuario: TIntegerField
+      FieldName = 'idusuario'
+      Origin = 'idusuario'
+    end
+    object Desembarquesdataalteracao: TSQLTimeStampField
+      FieldName = 'dataalteracao'
+      Origin = 'dataalteracao'
+    end
+    object Desembarquesidusuarioalteracao: TIntegerField
+      FieldName = 'idusuarioalteracao'
+      Origin = 'idusuarioalteracao'
+    end
+    object Desembarquesidsafra: TIntegerField
+      FieldName = 'idsafra'
+      Origin = 'idsafra'
+    end
+    object Desembarquesidtalhao: TIntegerField
+      FieldName = 'idtalhao'
+      Origin = 'idtalhao'
+    end
+    object Desembarquesidcultura: TIntegerField
+      FieldName = 'idcultura'
+      Origin = 'idcultura'
+    end
+    object Desembarquesplaca: TWideStringField
+      FieldName = 'placa'
+      Origin = 'placa'
+      Size = 15
+    end
+    object Desembarquesdatadesembarque: TDateField
+      FieldName = 'datadesembarque'
+      Origin = 'datadesembarque'
+    end
+    object Desembarqueshoradesembarque: TTimeField
+      FieldName = 'horadesembarque'
+      Origin = 'horadesembarque'
+    end
+    object Desembarquestara: TBCDField
+      FieldName = 'tara'
+      Origin = 'tara'
+      Precision = 15
+      Size = 3
+    end
+    object Desembarquesbruto: TBCDField
+      FieldName = 'bruto'
+      Origin = 'bruto'
+      Precision = 15
+      Size = 3
+    end
+    object Desembarquesliquido: TBCDField
+      FieldName = 'liquido'
+      Origin = 'liquido'
+      Precision = 15
+      Size = 3
+    end
+    object Desembarquesimp: TBCDField
+      FieldName = 'imp'
+      Origin = 'imp'
+      Precision = 15
+      Size = 3
+    end
+    object Desembarquesqueb: TBCDField
+      FieldName = 'queb'
+      Origin = 'queb'
+      Precision = 15
+      Size = 3
+    end
+    object Desembarquesverd: TBCDField
+      FieldName = 'verd'
+      Origin = 'verd'
+      Precision = 15
+      Size = 3
+    end
+    object Desembarquesavar: TBCDField
+      FieldName = 'avar'
+      Origin = 'avar'
+      Precision = 15
+      Size = 3
+    end
+    object Desembarquesumid: TBCDField
+      FieldName = 'umid'
+      Origin = 'umid'
+      Precision = 15
+      Size = 3
+    end
+    object Desembarquessyncaws: TIntegerField
+      FieldName = 'syncaws'
+      Origin = 'syncaws'
+    end
+    object Desembarquessyncfaz: TIntegerField
+      FieldName = 'syncfaz'
+      Origin = 'syncfaz'
+    end
+    object Desembarquesvalornf: TBCDField
+      FieldName = 'valornf'
+      Origin = 'valornf'
+      Precision = 15
+      Size = 3
     end
   end
 end

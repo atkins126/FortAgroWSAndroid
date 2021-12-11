@@ -751,6 +751,30 @@ type
     TAbastecimentoimg4: TWideMemoField;
     TAbastecimentoimg5: TWideMemoField;
     TAbastecimentoexterno: TIntegerField;
+    Desembarques: TFDQuery;
+    Desembarquesid: TIntegerField;
+    Desembarquesstatus: TIntegerField;
+    Desembarquesdatareg: TSQLTimeStampField;
+    Desembarquesidusuario: TIntegerField;
+    Desembarquesdataalteracao: TSQLTimeStampField;
+    Desembarquesidusuarioalteracao: TIntegerField;
+    Desembarquesidsafra: TIntegerField;
+    Desembarquesidtalhao: TIntegerField;
+    Desembarquesidcultura: TIntegerField;
+    Desembarquesplaca: TWideStringField;
+    Desembarquesdatadesembarque: TDateField;
+    Desembarqueshoradesembarque: TTimeField;
+    Desembarquestara: TBCDField;
+    Desembarquesbruto: TBCDField;
+    Desembarquesliquido: TBCDField;
+    Desembarquesimp: TBCDField;
+    Desembarquesqueb: TBCDField;
+    Desembarquesverd: TBCDField;
+    Desembarquesavar: TBCDField;
+    Desembarquesumid: TBCDField;
+    Desembarquessyncaws: TIntegerField;
+    Desembarquessyncfaz: TIntegerField;
+    Desembarquesvalornf: TBCDField;
     procedure TPostAuxItemRevisaoReconcileError(DataSet: TFDDataSet;
       E: EFDException; UpdateKind: TFDDatSRowState;
       var Action: TFDDAptReconcileAction);
@@ -770,7 +794,7 @@ type
     function  RetornaMaxIdGenerico(Atabela: string): string;
     function  RetornaIdUsuario(ANome: string): string;
     procedure InsereSaidaAbastecimento(dataSaida, idcentrocusto,
-     idlocalestoque, idproduto, qtditens, idresponsavel: string);
+     idlocalestoque, idproduto, qtditens, idresponsavel,idabastecimento: string);
     procedure AtualizaHorimetroMaquina(horimetro,Idmaquina:string);
   public
     function  GetDataSetAsJSON(DataSet: TDataSet): TJSONObject;
@@ -833,6 +857,7 @@ type
     function  AcceptMonitoramentoPontos(obj: TJSONObject)           : TJSONObject;
     function  AcceptMonitoramentoPontosValores(obj: TJSONObject)    : TJSONObject;
     function  AcceptEmbarques(obj: TJSONObject): TJSONObject;
+    function  AcceptDesembarques(obj: TJSONObject): TJSONObject;
 
     function  AcceptAuxRevisaoItens(obj: TJSONObject): TJSONObject;
     function  AcceptRevisao(obj: TJSONObject): TJSONObject;
@@ -1131,18 +1156,22 @@ begin
     Toperacaosafratalhaostatus.AsInteger             := 2;
     if vJoItemO.GetValue('finalidade').Value.Length>0 then
      Toperacaosafratalhaofinalidade.AsString  := vJoItemO.GetValue('finalidade').value;
-    if vJoItemO.GetValue('IdTipoaplicacaosolido').Value.Length>0 then
+    if (vJoItemO.GetValue('IdTipoaplicacaosolido').Value.Length>0)and
+     (vJoItemO.GetValue('idOperacao ').Value<>'5') then
      Toperacaosafratalhaoidtipoaplicacaosolido.AsString  := vJoItemO.GetValue('IdTipoaplicacaosolido').value;
     if vJoItemO.GetValue('idcultura').Value.Length>0 then
      Toperacaosafratalhaoidcultura.AsString  := vJoItemO.GetValue('idcultura').value;
-    if vJoItemO.GetValue('idreceituario').Value.Length>0 then
+    if (vJoItemO.GetValue('idreceituario').Value.Length>0)and
+     (vJoItemO.GetValue('idOperacao ').Value<>'5') then
      Toperacaosafratalhaoidreceituario.AsString  := vJoItemO.GetValue('idreceituario').value;
-    if vJoItemO.GetValue('tipoterraaereo').Value.Length>0 then
+    if (vJoItemO.GetValue('tipoterraaereo').Value.Length>0)and
+     (vJoItemO.GetValue('idOperacao ').Value<>'5') then
      Toperacaosafratalhaotipoterraaereo.AsString  := vJoItemO.GetValue('tipoterraaereo').value;
     try
      frmPrincipal.mlog.Lines.Add('Confirmando Inserção');
      Toperacaosafratalhao.ApplyUpdates(-1);
-     if vJoItemO.GetValue('idreceituario').value.Length>0 then
+     if (vJoItemO.GetValue('idreceituario').value.Length>0)and
+     (vJoItemO.GetValue('idOperacao ').Value<>'5') then
      begin
       frmPrincipal.mlog.Lines.Add('Alterando Status Receituraio');
       AlteraStatusReceituario(vJoItemO.GetValue('idreceituario').value);
@@ -2460,7 +2489,7 @@ var
   StrAux     : TStringWriter;
   txtJson    : TJsonTextWriter;
   vQry       : TFDQuery;
-  vIdResult,vIdProduto  :string;
+  vIdResult,vIdProduto,vIdAbastecimento  :string;
 begin
   if FDConPG.Connected=false then
    ConectaPG_Local;
@@ -2499,6 +2528,8 @@ begin
       vQry.FieldByName('idMaquina').AsString);
      try
       TAbastecimento.ApplyUpdates(-1);
+      vIdAbastecimento := RetornaMaxIdGenerico('abastecimento');
+
       frmPrincipal.mlog.Lines.Add('Insert Confirmado Id Maquina:'+
        vQry.FieldByName('idMaquina').AsString);
 
@@ -2513,7 +2544,7 @@ begin
        vQry.FieldByName('idlocalestoque').AsString,
        vQry.FieldByName('combustivel').AsString,
        StringReplace(vQry.FieldByName('volumelt').AsString,',','.',[rfReplaceAll]),
-       '0');
+       '0',vIdAbastecimento);
       if vIdResult.Length>0 then
        vIdResult:=vIdResult+','+vQry.FieldByName('id').AsString
       else
@@ -2546,7 +2577,7 @@ begin
 end;
 
 procedure TdmDB.InsereSaidaAbastecimento(dataSaida, idcentrocusto,
-  idlocalestoque, idproduto, qtditens, idresponsavel: string);
+  idlocalestoque, idproduto, qtditens, idresponsavel,idabastecimento: string);
 var
  vValorCustoMedio:string;
 begin
@@ -2561,7 +2592,8 @@ begin
     vValorCustoMedio:='0';
 
    Clear;
-   Add('insert into estoquesaida(datasaidaestoque,idcentrocusto,idlocalestoque,idproduto,qtditens,idresponsavel,valorsaida)');
+   Add('insert into estoquesaida(datasaidaestoque,idcentrocusto,idlocalestoque,');
+   Add('idproduto,qtditens,idresponsavel,valorsaida,idabastecimento)');
    Add('values(');
    Add(dataSaida.QuotedString+',');
    Add(idcentrocusto+',');
@@ -2569,7 +2601,8 @@ begin
    Add(idproduto+',');
    Add(qtditens+',');
    Add(idresponsavel+',');
-   Add(StringReplace(vValorCustoMedio,',','.',[rfReplaceAll])+')');
+   Add(StringReplace(vValorCustoMedio,',','.',[rfReplaceAll])+',');
+   Add(idabastecimento+')');
    ExecSQL;
    AtaulizaSaldoAtualCustoMedio(idproduto);
  end;
@@ -2830,6 +2863,69 @@ begin
         txtJson.WriteStartObject;
         txtJson.WritePropertyName('Erro');
         txtJson.WriteValue('Erro Ao Sincronizar Aux Item Revisao:'+E.Message);
+        txtJson.WriteEndObject;
+        Result := TJsonObject.ParseJSONValue(TEncoding.UTF8.GetBytes(StrAux.ToString),0)as TJSONObject;
+      end;
+    end;
+  end;
+  StrAux  := TStringWriter.Create;
+  txtJson := TJsonTextWriter.Create(StrAux);
+  txtJson.Formatting := TJsonFormatting.Indented;
+  txtJson.WriteStartObject;
+  txtJson.WritePropertyName('OK');
+  txtJson.WriteValue(vIdResult);
+  txtJson.WriteEndObject;
+  Result := TJsonObject.ParseJSONValue(TEncoding.UTF8.GetBytes(StrAux.ToString),0)as TJSONObject;
+end;
+
+function TdmDB.AcceptDesembarques(obj: TJSONObject): TJSONObject;
+var
+  I,X: Integer;
+  JsonToSend :TStringStream;
+  vField,vFieldJS:string;
+  LJSon      : TJSONArray;
+  StrAux     : TStringWriter;
+  txtJson    : TJsonTextWriter;
+  vQry       : TFDQuery;
+  vIdResult  :string;
+begin
+  if FDConPG.Connected=false
+   then ConectaPG_Local;
+  vQry       := TFDQuery.Create(nil);
+  vQry.Connection := FDConPG;
+  Desembarques.Connection := FDConPG;
+  Desembarques.Open();
+  JsonToSend := TStringStream.Create(obj.ToJSON);
+  vQry.LoadFromStream(JsonToSend,sfJSON);
+  vIdResult:='';
+  while not vQry.eof do
+  begin
+    Desembarques.Close;
+    Desembarques.Open;
+    Desembarques.Insert;
+    for x := 0 to Desembarques.Fields.Count -1 do
+    begin
+     vField  := StringReplace(Desembarques.Fields[x].Name,
+      'Desembarques','',[rfReplaceAll]);
+     if (vField<>'datareg') and (vField<>'id') then
+      Desembarques.FieldByName(vField).AsString     := vQry.FieldByName(vField).AsString;
+    end;
+    try
+     Desembarques.ApplyUpdates(-1);
+     if vIdResult.Length>0 then
+      vIdResult:=vIdResult+','+vQry.FieldByName('id').AsString
+     else
+      vIdResult:=vQry.FieldByName('id').AsString;
+     vQry.Next;
+    except
+      on E: Exception do
+      begin
+        StrAux  := TStringWriter.Create;
+        txtJson := TJsonTextWriter.Create(StrAux);
+        txtJson.Formatting := TJsonFormatting.Indented;
+        txtJson.WriteStartObject;
+        txtJson.WritePropertyName('Erro');
+        txtJson.WriteValue('Erro Ao Sincronizar Desembarque:'+E.Message);
         txtJson.WriteEndObject;
         Result := TJsonObject.ParseJSONValue(TEncoding.UTF8.GetBytes(StrAux.ToString),0)as TJSONObject;
       end;
