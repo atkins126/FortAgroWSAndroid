@@ -771,6 +771,24 @@ begin
       end;
     end);
 
+    THorse.Post('/Desembarques',
+    procedure(Req: THorseRequest; Res: THorseResponse; Next: TProc)
+    var
+      LBody,LBodyRed: TJSONObject;
+    begin
+      mLog.Lines.Add(FormatDateTime('dd-mm-yyyy-hh:mm:ss',now)+' Recebendo Desembarques');
+      LBody := Req.Body<TJSONObject>;
+      try
+       LBodyRed:=dmDb.AcceptDesembarques(LBody);
+       Res.Send(LBodyRed).Status(200)
+       except on ex:exception do
+       begin
+        mLog.Lines.Add(FormatDateTime('dd-mm-yyyy-hh:mm:ss',now)+' Erro :'+ex.Message);
+        Res.Send(tjsonobject.Create.AddPair('Mensagem', ex.Message)).Status(500);
+       end;
+      end;
+    end);
+
     THorse.Get('/GetAuxItemRevisao',
     procedure(Req: THorseRequest; Res: THorseResponse; Next: TProc)
     begin

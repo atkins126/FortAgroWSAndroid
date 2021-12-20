@@ -4,10 +4,10 @@ object dmDB: TdmDB
   Width = 813
   object FDConPG: TFDConnection
     Params.Strings = (
-      'Database=FortAgropec'
+      'Database=FortAgro'
       'User_Name=postgres'
-      'Password=Dev#110485'
-      'Server=127.0.0.1'
+      'Password=ffg@2021'
+      'Server=192.168.236.50'
       'DriverID=PG')
     LoginPrompt = False
     Left = 40
@@ -289,6 +289,14 @@ object dmDB: TdmDB
     object TOperadorMaquinasyncaws: TIntegerField
       FieldName = 'syncaws'
       Origin = 'syncaws'
+    end
+    object TOperadorMaquinasyncfaz: TIntegerField
+      FieldName = 'syncfaz'
+      Origin = 'syncfaz'
+    end
+    object TOperadorMaquinapulverizacao: TIntegerField
+      FieldName = 'pulverizacao'
+      Origin = 'pulverizacao'
     end
   end
   object TAuxCobertura: TFDQuery
@@ -1240,7 +1248,7 @@ object dmDB: TdmDB
     Connection = FDConPG
     SQL.Strings = (
       'select r.*,u.nome responsavel from receiturario r'
-      'join usuario u on r.idResponsavel=u.id '
+      'join usuario u on r.idResponsavel=u.id and tiporeceituario=0 '
       'where r.status=1 and liberado=1')
     Left = 386
     Top = 214
@@ -2942,17 +2950,26 @@ object dmDB: TdmDB
     SQL.Strings = (
       'select '
       
-        #39'INSERT INTO revisaomaquinahist(id,idplanorevisao,idmaquina, obs' +
-        'ervacao, datainicio, datafim,horimetro,horimetroproxima)VALUES('#39 +
-        '||'
+        ' '#39'INSERT INTO revisaomaquinahist(id,idplanorevisao,idmaquina,dat' +
+        'ainicio, datafim,horimetro,horimetroproxima,planonome,horimetrom' +
+        'aquina)VALUES('#39' '
       
-        'id||'#39','#39'||idplanorevisao||'#39','#39'||idmaquina||'#39','#39'||'#39#39#39#39'||coalesce(obs' +
-        'ervacao,'#39#39')||'#39#39#39#39'||'#39','#39'||'#39#39#39#39'||datainicio||'#39#39#39#39'||'#39','#39'||'#39#39#39#39'||dataf' +
-        'im||'#39#39#39#39'||'#39','#39'||'
-      'horimetro||'#39','#39'||horimetroproxima||'#39');'#39' as INSERT'
-      'from revisaomaquina '
-      'where status>-1 and idplanorevisao>0'
-      'order by datainicio,horimetro ')
+        '||row_number() OVER (PARTITION by 0)||'#39','#39'||plano.id||'#39','#39'||maquin' +
+        'a.id||'#39','#39'||'#39#39#39#39'|| max(revisao.datainicio)||'#39#39#39#39'||'#39','#39'|| '
+      #39#39#39#39'||max(revisao.datafim)||'#39#39#39#39'||'#39','#39'||'
+      'max(revisao.horimetro)||'#39','#39'||'
+      
+        ' max(revisao.horimetroproxima)||'#39','#39'||'#39#39#39#39'||plano.nome||'#39#39#39#39'||'#39','#39 +
+        '||'
+      ' max(maquina.horimetro)||'#39');'#39' as INSERT'
+      ' from revisaomaquina revisao '
+      'join maquinaveiculo maquina on maquina.id=revisao.idmaquina '
+      
+        'join planorevisao plano on revisao.idplanorevisao=plano.id and p' +
+        'lano.status =1'
+      'where revisao.status =1'
+      'group by maquina.id ,plano.id ,plano.nome,plano.intervalohoras '
+      'order by maquina.id ,plano.intervalohoras  ')
     Left = 48
     Top = 208
     object TManutencaoinsert: TWideMemoField
@@ -3166,7 +3183,7 @@ object dmDB: TdmDB
       
         #39'insert into produtos(id,status,nome,tipo,unidademedida,defenciv' +
         'o,codigofabricante)values('#39'||'
-      'id||'#39','#39'||status||'#39','#39'||'#39#39#39#39'||nome||'#39#39#39#39'||'#39','#39'||'
+      'id||'#39','#39'||status||'#39','#39'||'#39#39#39#39'||replace(nome,'#39#39#39#39','#39' '#39')||'#39#39#39#39'||'#39','#39'||'
       'case'
       ' when defensivos=0 then 0'
       ' else'
@@ -3497,6 +3514,126 @@ object dmDB: TdmDB
     object TPostAuxItemRevisaosyncfaz: TIntegerField
       FieldName = 'syncfaz'
       Origin = 'syncfaz'
+    end
+  end
+  object Desembarques: TFDQuery
+    CachedUpdates = True
+    Connection = FDConPG
+    SQL.Strings = (
+      'select * from desembarque')
+    Left = 392
+    Top = 88
+    object Desembarquesid: TIntegerField
+      FieldName = 'id'
+      Origin = 'id'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+    end
+    object Desembarquesstatus: TIntegerField
+      FieldName = 'status'
+      Origin = 'status'
+    end
+    object Desembarquesdatareg: TSQLTimeStampField
+      FieldName = 'datareg'
+      Origin = 'datareg'
+    end
+    object Desembarquesidusuario: TIntegerField
+      FieldName = 'idusuario'
+      Origin = 'idusuario'
+    end
+    object Desembarquesdataalteracao: TSQLTimeStampField
+      FieldName = 'dataalteracao'
+      Origin = 'dataalteracao'
+    end
+    object Desembarquesidusuarioalteracao: TIntegerField
+      FieldName = 'idusuarioalteracao'
+      Origin = 'idusuarioalteracao'
+    end
+    object Desembarquesidsafra: TIntegerField
+      FieldName = 'idsafra'
+      Origin = 'idsafra'
+    end
+    object Desembarquesidtalhao: TIntegerField
+      FieldName = 'idtalhao'
+      Origin = 'idtalhao'
+    end
+    object Desembarquesidcultura: TIntegerField
+      FieldName = 'idcultura'
+      Origin = 'idcultura'
+    end
+    object Desembarquesplaca: TWideStringField
+      FieldName = 'placa'
+      Origin = 'placa'
+      Size = 15
+    end
+    object Desembarquesdatadesembarque: TDateField
+      FieldName = 'datadesembarque'
+      Origin = 'datadesembarque'
+    end
+    object Desembarqueshoradesembarque: TTimeField
+      FieldName = 'horadesembarque'
+      Origin = 'horadesembarque'
+    end
+    object Desembarquestara: TBCDField
+      FieldName = 'tara'
+      Origin = 'tara'
+      Precision = 15
+      Size = 3
+    end
+    object Desembarquesbruto: TBCDField
+      FieldName = 'bruto'
+      Origin = 'bruto'
+      Precision = 15
+      Size = 3
+    end
+    object Desembarquesliquido: TBCDField
+      FieldName = 'liquido'
+      Origin = 'liquido'
+      Precision = 15
+      Size = 3
+    end
+    object Desembarquesimp: TBCDField
+      FieldName = 'imp'
+      Origin = 'imp'
+      Precision = 15
+      Size = 3
+    end
+    object Desembarquesqueb: TBCDField
+      FieldName = 'queb'
+      Origin = 'queb'
+      Precision = 15
+      Size = 3
+    end
+    object Desembarquesverd: TBCDField
+      FieldName = 'verd'
+      Origin = 'verd'
+      Precision = 15
+      Size = 3
+    end
+    object Desembarquesavar: TBCDField
+      FieldName = 'avar'
+      Origin = 'avar'
+      Precision = 15
+      Size = 3
+    end
+    object Desembarquesumid: TBCDField
+      FieldName = 'umid'
+      Origin = 'umid'
+      Precision = 15
+      Size = 3
+    end
+    object Desembarquessyncaws: TIntegerField
+      FieldName = 'syncaws'
+      Origin = 'syncaws'
+    end
+    object Desembarquessyncfaz: TIntegerField
+      FieldName = 'syncfaz'
+      Origin = 'syncfaz'
+    end
+    object Desembarquesvalornf: TBCDField
+      FieldName = 'valornf'
+      Origin = 'valornf'
+      Precision = 15
+      Size = 3
     end
   end
 end
