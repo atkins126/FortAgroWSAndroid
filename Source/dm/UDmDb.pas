@@ -775,6 +775,8 @@ type
     Desembarquessyncaws: TIntegerField;
     Desembarquessyncfaz: TIntegerField;
     Desembarquesvalornf: TBCDField;
+    TOperadorMaquinasyncfaz: TIntegerField;
+    TOperadorMaquinapulverizacao: TIntegerField;
     procedure TPostAuxItemRevisaoReconcileError(DataSet: TFDDataSet;
       E: EFDException; UpdateKind: TFDDatSRowState;
       var Action: TFDDAptReconcileAction);
@@ -1104,7 +1106,7 @@ end;
 
 function TdmDB.AcceptOperacaoSafraTalhao(obj: TJSONObject): TJSONObject;
 var
- vJsonString :string;
+ vJsonString,vIdReceituario:string;
  vJoInsert,vJoItemO,vJoItemO1 : TJSONObject;
  vJoItem,vJoItem1   : TJSONArray;
  vIdPedido,vIdentificador,vIdOperacaoExiste:string;
@@ -1130,6 +1132,7 @@ begin
     begin
      vIdOperacaoExiste := VerificaOperacaoReceituarioExiste(vJoItemO.GetValue('idTalhao').value,
       vJoItemO.GetValue('idreceituario').value);
+      vIdReceituario := vJoItemO.GetValue('idreceituario').value;
     end;
     Toperacaosafratalhao.Close;
     Toperacaosafratalhao.Open;
@@ -1161,17 +1164,14 @@ begin
      Toperacaosafratalhaoidtipoaplicacaosolido.AsString  := vJoItemO.GetValue('IdTipoaplicacaosolido').value;
     if vJoItemO.GetValue('idcultura').Value.Length>0 then
      Toperacaosafratalhaoidcultura.AsString  := vJoItemO.GetValue('idcultura').value;
-    if (vJoItemO.GetValue('idreceituario').Value.Length>0)and
-     (vJoItemO.GetValue('idOperacao ').Value<>'5') then
+    if vIdReceituario.Length>0 then
      Toperacaosafratalhaoidreceituario.AsString  := vJoItemO.GetValue('idreceituario').value;
-    if (vJoItemO.GetValue('tipoterraaereo').Value.Length>0)and
-     (vJoItemO.GetValue('idOperacao ').Value<>'5') then
+    if (vJoItemO.GetValue('tipoterraaereo').Value.Length>0) then
      Toperacaosafratalhaotipoterraaereo.AsString  := vJoItemO.GetValue('tipoterraaereo').value;
     try
      frmPrincipal.mlog.Lines.Add('Confirmando Inserção');
      Toperacaosafratalhao.ApplyUpdates(-1);
-     if (vJoItemO.GetValue('idreceituario').value.Length>0)and
-     (vJoItemO.GetValue('idOperacao ').Value<>'5') then
+     if (vJoItemO.GetValue('idreceituario').value.Length>0) then
      begin
       frmPrincipal.mlog.Lines.Add('Alterando Status Receituraio');
       AlteraStatusReceituario(vJoItemO.GetValue('idreceituario').value);
@@ -2436,7 +2436,7 @@ var
 begin
  vQry            := TFDQuery.Create(nil);
  vQry.Connection := FDConPG;
- with vQry,vQry.SQL do
+ with TAbastecimento,TAbastecimento.SQL do
  begin
    Clear;
    Add('select * from abastecimento');
@@ -2515,7 +2515,7 @@ begin
       vQry.FieldByName('horimetro').AsString.QuotedString) then
       TAbastecimento.Insert
      else
-      vQry.Next;
+      TAbastecimento.Edit;
      for x := 0 to TAbastecimento.Fields.Count -1 do
      begin
       vField  := StringReplace(TAbastecimento.Fields[x].Name,
@@ -4443,6 +4443,8 @@ begin
       txtJson.WriteValue(TOperadorMaquinaCPF.AsString);
       txtJson.WritePropertyName('STATUS');
       txtJson.WriteValue(TOperadorMaquinaSTATUS.AsString);
+      txtJson.WritePropertyName('PULVERIZACAO');
+      txtJson.WriteValue(TOperadorMaquinaPULVERIZACAO.AsString);
       txtJson.WriteEndObject;
       TOperadorMaquina.Next;
      end;

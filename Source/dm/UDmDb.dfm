@@ -4,10 +4,10 @@ object dmDB: TdmDB
   Width = 813
   object FDConPG: TFDConnection
     Params.Strings = (
-      'Database=FortAgro0612'
+      'Database=FortAgro'
       'User_Name=postgres'
-      'Password=Dev#110485'
-      'Server=127.0.0.1'
+      'Password=ffg@2021'
+      'Server=192.168.236.50'
       'DriverID=PG')
     LoginPrompt = False
     Left = 40
@@ -289,6 +289,14 @@ object dmDB: TdmDB
     object TOperadorMaquinasyncaws: TIntegerField
       FieldName = 'syncaws'
       Origin = 'syncaws'
+    end
+    object TOperadorMaquinasyncfaz: TIntegerField
+      FieldName = 'syncfaz'
+      Origin = 'syncfaz'
+    end
+    object TOperadorMaquinapulverizacao: TIntegerField
+      FieldName = 'pulverizacao'
+      Origin = 'pulverizacao'
     end
   end
   object TAuxCobertura: TFDQuery
@@ -1240,7 +1248,7 @@ object dmDB: TdmDB
     Connection = FDConPG
     SQL.Strings = (
       'select r.*,u.nome responsavel from receiturario r'
-      'join usuario u on r.idResponsavel=u.id '
+      'join usuario u on r.idResponsavel=u.id and tiporeceituario=0 '
       'where r.status=1 and liberado=1')
     Left = 386
     Top = 214
@@ -2942,17 +2950,26 @@ object dmDB: TdmDB
     SQL.Strings = (
       'select '
       
-        #39'INSERT INTO revisaomaquinahist(id,idplanorevisao,idmaquina, obs' +
-        'ervacao, datainicio, datafim,horimetro,horimetroproxima)VALUES('#39 +
-        '||'
+        ' '#39'INSERT INTO revisaomaquinahist(id,idplanorevisao,idmaquina,dat' +
+        'ainicio, datafim,horimetro,horimetroproxima,planonome,horimetrom' +
+        'aquina)VALUES('#39' '
       
-        'id||'#39','#39'||idplanorevisao||'#39','#39'||idmaquina||'#39','#39'||'#39#39#39#39'||coalesce(obs' +
-        'ervacao,'#39#39')||'#39#39#39#39'||'#39','#39'||'#39#39#39#39'||datainicio||'#39#39#39#39'||'#39','#39'||'#39#39#39#39'||dataf' +
-        'im||'#39#39#39#39'||'#39','#39'||'
-      'horimetro||'#39','#39'||horimetroproxima||'#39');'#39' as INSERT'
-      'from revisaomaquina '
-      'where status>-1 and idplanorevisao>0'
-      'order by datainicio,horimetro ')
+        '||row_number() OVER (PARTITION by 0)||'#39','#39'||plano.id||'#39','#39'||maquin' +
+        'a.id||'#39','#39'||'#39#39#39#39'|| max(revisao.datainicio)||'#39#39#39#39'||'#39','#39'|| '
+      #39#39#39#39'||max(revisao.datafim)||'#39#39#39#39'||'#39','#39'||'
+      'max(revisao.horimetro)||'#39','#39'||'
+      
+        ' max(revisao.horimetroproxima)||'#39','#39'||'#39#39#39#39'||plano.nome||'#39#39#39#39'||'#39','#39 +
+        '||'
+      ' max(maquina.horimetro)||'#39');'#39' as INSERT'
+      ' from revisaomaquina revisao '
+      'join maquinaveiculo maquina on maquina.id=revisao.idmaquina '
+      
+        'join planorevisao plano on revisao.idplanorevisao=plano.id and p' +
+        'lano.status =1'
+      'where revisao.status =1'
+      'group by maquina.id ,plano.id ,plano.nome,plano.intervalohoras '
+      'order by maquina.id ,plano.intervalohoras  ')
     Left = 48
     Top = 208
     object TManutencaoinsert: TWideMemoField
