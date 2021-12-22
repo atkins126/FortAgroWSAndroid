@@ -2,7 +2,7 @@ object frmPrincipal: TfrmPrincipal
   Left = 0
   Top = 0
   ClientHeight = 389
-  ClientWidth = 734
+  ClientWidth = 609
   Color = clBackground
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -18,7 +18,7 @@ object frmPrincipal: TfrmPrincipal
     AlignWithMargins = True
     Left = 3
     Top = 3
-    Width = 728
+    Width = 603
     Height = 13
     Align = alTop
     Alignment = taCenter
@@ -38,7 +38,7 @@ object frmPrincipal: TfrmPrincipal
   object mLog: TMemo
     Left = 0
     Top = 19
-    Width = 734
+    Width = 609
     Height = 335
     Align = alClient
     Color = clInactiveCaptionText
@@ -49,22 +49,25 @@ object frmPrincipal: TfrmPrincipal
     Font.Style = []
     ParentFont = False
     TabOrder = 0
+    ExplicitWidth = 734
   end
   object Panel1: TPanel
     Left = 0
     Top = 354
-    Width = 734
+    Width = 609
     Height = 35
     Align = alBottom
     TabOrder = 1
+    ExplicitWidth = 734
     object chkLogJson: TCheckBox
-      Left = 624
+      Left = 499
       Top = 1
       Width = 109
       Height = 33
       Align = alRight
       Caption = 'View Log Json'
       TabOrder = 0
+      ExplicitLeft = 624
     end
   end
 end
