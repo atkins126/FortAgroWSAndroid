@@ -49,7 +49,6 @@ object frmPrincipal: TfrmPrincipal
     Font.Style = []
     ParentFont = False
     TabOrder = 0
-    ExplicitWidth = 734
   end
   object Panel1: TPanel
     Left = 0
@@ -58,7 +57,6 @@ object frmPrincipal: TfrmPrincipal
     Height = 35
     Align = alBottom
     TabOrder = 1
-    ExplicitWidth = 734
     object chkLogJson: TCheckBox
       Left = 499
       Top = 1
@@ -67,7 +65,6 @@ object frmPrincipal: TfrmPrincipal
       Align = alRight
       Caption = 'View Log Json'
       TabOrder = 0
-      ExplicitLeft = 624
     end
   end
 end

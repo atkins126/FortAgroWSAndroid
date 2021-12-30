@@ -2950,26 +2950,42 @@ object dmDB: TdmDB
     SQL.Strings = (
       'select '
       
-        ' '#39'INSERT INTO revisaomaquinahist(id,idplanorevisao,idmaquina,dat' +
-        'ainicio, datafim,horimetro,horimetroproxima,planonome,horimetrom' +
-        'aquina)VALUES('#39' '
+        #39'INSERT INTO revisaomaquinahist(id,idplanorevisao,idmaquina,data' +
+        'inicio, datafim,horimetro,horimetroproxima,planonome,horimetroma' +
+        'quina)VALUES('#39' '
       
         '||row_number() OVER (PARTITION by 0)||'#39','#39'||plano.id||'#39','#39'||maquin' +
-        'a.id||'#39','#39'||'#39#39#39#39'|| max(revisao.datainicio)||'#39#39#39#39'||'#39','#39'|| '
-      #39#39#39#39'||max(revisao.datafim)||'#39#39#39#39'||'#39','#39'||'
-      'max(revisao.horimetro)||'#39','#39'||'
+        'a.id||'#39','#39'||'#39#39#39#39'||ultima_revisao.datainicio||'#39#39#39#39'||'#39','#39'|| '
+      #39#39#39#39'||ultima_revisao.datafim||'#39#39#39#39'||'#39','#39'||'
+      'revisao.horimetro||'#39','#39'||'
+      'revisao.horimetroproxima||'#39','#39'||'#39#39#39#39'||plano.nome||'#39#39#39#39'||'#39','#39'||'
+      'maquina.horimetro||'#39');'#39' as INSERT'
+      'from revisaomaquina revisao'
       
-        ' max(revisao.horimetroproxima)||'#39','#39'||'#39#39#39#39'||plano.nome||'#39#39#39#39'||'#39','#39 +
-        '||'
-      ' max(maquina.horimetro)||'#39');'#39' as INSERT'
-      ' from revisaomaquina revisao '
-      'join maquinaveiculo maquina on maquina.id=revisao.idmaquina '
+        'inner join planorevisao plano on revisao.idplanorevisao = plano.' +
+        'id'
       
-        'join planorevisao plano on revisao.idplanorevisao=plano.id and p' +
-        'lano.status =1'
-      'where revisao.status =1'
-      'group by maquina.id ,plano.id ,plano.nome,plano.intervalohoras '
-      'order by maquina.id ,plano.intervalohoras  ')
+        'inner join maquinaveiculo maquina on revisao.idmaquina = maquina' +
+        '.id and maquina.status = 1'
+      'inner join '
+      '('
+      #9'select '
+      #9'revisao.idplanorevisao as cod_plano,'
+      #9'revisao.idmaquina as cod_maquina,'
+      #9'max(revisao.horimetro) as ultima_revisao,'
+      #9'max(datainicio)datainicio,'
+      #9'max(datafim)datafim'
+      #9'from revisaomaquina revisao'
+      #9'where revisao.status in (1,3)'
+      #9'group by '
+      #9'revisao.idplanorevisao,'
+      #9'revisao.idmaquina'
+      
+        ') as ultima_revisao on revisao.idplanorevisao = ultima_revisao.c' +
+        'od_plano '
+      #9#9'and revisao.idmaquina = ultima_revisao.cod_maquina '
+      #9#9'and revisao.horimetro = ultima_revisao.ultima_revisao'
+      'where revisao.status in (1,3)')
     Left = 48
     Top = 208
     object TManutencaoinsert: TWideMemoField

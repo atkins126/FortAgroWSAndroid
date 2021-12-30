@@ -935,7 +935,7 @@ begin
 
     THorse.Listen(8099, procedure(Horse: THorse)
     begin
-      log.Caption := ('Servidor Fort Agro Rodando na porta: ' + Horse.Port.ToString+' v2021-11-02');
+      log.Caption := ('Servidor Fort Agro Rodando na porta: ' + Horse.Port.ToString+' v2021-12-01');
       Application.ProcessMessages;
     end);
 end;
